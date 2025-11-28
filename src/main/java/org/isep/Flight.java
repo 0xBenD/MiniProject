@@ -8,12 +8,15 @@ public class Flight {
     private int flightNumber;
     private String origine;
     private String destination;
-    private String Status;
+    private String Status;// on time / departure / Boarding / Delayed /..
     private Date date;
+    private FlightStatus status;
 
+    /*
+    new class + enum (flight status)
+     */
 
-
-    public Flight(int flightNumber, String origine, String destination){
+    public Flight(int flightNumber,FlightStatus status,  String origine, String destination){
         this.flightNumber = flightNumber;
         this.origine = origine;
         this.destination = destination;
@@ -29,8 +32,7 @@ public class Flight {
 
     }
 
-    public void listingPassenger(){
-
+    public void list
     }
 
 }

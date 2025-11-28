@@ -7,5 +7,7 @@ public class Main {
         System.out.println("SPEEEEEEUUUUCIALLLL");
         System.out.println("............... AHHHHHHHHHH");
         System.out.println("DINOSAURE AAAAAUUUUUUUUGGGHHHH!!!!!");
+
+        Flight flight = new Flight(FlightStatus.BOARDING, );
     }
 }

@@ -8,7 +8,7 @@ public class Book {
     private int bookNumber;
     private String Status;
     private Date date;
-    private ArrayList<Integer> bookList = new ArrayList<>()
+    private ArrayList<Integer> bookList = new ArrayList<>();
 
     public Book(int bookNumber){
         Random randomInt = new Random();
