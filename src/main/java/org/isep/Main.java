@@ -7,5 +7,6 @@ public class Main {
         System.out.println("Hello World!");
         System.out.println("SPEEEEEEUUUUCIALLLL");
         System.out.println("............... AHHHHHHHHHH");
+        System.out.println("DINOSAURE AAAAAUUUUUUUUGGGHHHH!!!!!");
     }
 }
