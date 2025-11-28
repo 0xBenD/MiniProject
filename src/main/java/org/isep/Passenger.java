@@ -25,13 +25,13 @@ public class Passenger extends Person{
     }
 
     public void cancelFlight(int bookNumber){
-        for(book b : bookArrayList){
+        for(Book b : bookArrayList){
             if(b.getReservationNumber == bookNumber) b.cancelReservation();
         }
     }
 
     public void getReservations(int bookNumber){
-        for(book b : bookArrayList){
+        for(Book b : bookArrayList){
             if(b.getReservationNumber == bookNumber) System.out.printf("Reservation number is : %d , the date is : %s , status : ", bookNumber, b.getDate, b.getReservationNumber);
         }
     }
