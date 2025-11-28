@@ -9,8 +9,9 @@ public class Passenger extends Person{
         this.passeport = passeport;
     }
 
-    public void bookFlight(int flightNumber){
-        boolean success = Book.confirmReservation(flightNumber, super.getID(), passeport);
+    public void bookFlight(Flight flight){
+        Book book = new Book();
+        boolean success = book.confirmReservation(flight, super.getID(), passeport);
         if (success) System.out.printf("Booked flight number %d successfully.\n", flightNumber);
         else System.out.printf("Failed to book flight number %d.\n", flightNumber);
     }
