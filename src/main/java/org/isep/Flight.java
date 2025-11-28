@@ -8,7 +8,7 @@ public class Flight {
     private int flightNumber;
     private String origine;
     private String destination;
-    private String Status;
+    private FlightStatus Status;
     private Date date;
 
 
