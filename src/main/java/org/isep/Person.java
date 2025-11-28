@@ -32,4 +32,8 @@ public class Person {
         System.out.println("ID : " + ID + "\nname : " + name + "\naddress: " + address + "\n contact : " + contact);
     }
 
+    public int getID(){
+        return ID;
+    }
+
 }
