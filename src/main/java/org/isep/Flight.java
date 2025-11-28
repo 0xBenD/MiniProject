@@ -8,7 +8,7 @@ public class Flight {
     private int flightNumber;
     private String origine;
     private String destination;
-    private String Status;
+    private String Status;          //Status can be: On time, departed, boarding, delayed, cancelled, use the class Enumeration
     private Date date;
 
 
