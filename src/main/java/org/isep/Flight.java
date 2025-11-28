@@ -29,8 +29,7 @@ public class Flight {
 
     }
 
-    public void listingPassenger(int flightNumber){
-        Person.getID();
+    public void listingPassenger(){
 
     }
 
