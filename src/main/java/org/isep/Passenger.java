@@ -15,4 +15,8 @@ public class Passenger extends Person{
         if (success) System.out.printf("Booked flight number %d successfully.\n", flightNumber);
         else System.out.printf("Failed to book flight number %d.\n", flightNumber);
     }
+
+    public String getPasseport() {
+        return passeport;
+    }
 }

@@ -31,4 +31,11 @@ public class Employee extends Person{
         return role;
     }
 
+    public int getNumberEmp() {
+        return NumberEmp;
+    }
+
+    public String getHiringDate() {
+        return hiringDate;
+    }
 }
