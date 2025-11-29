@@ -17,7 +17,7 @@ public class Passenger extends Person{
     }
 
     public void bookFlight(Flight flight){
-        Book book = new Book();
+        Book book = new Book(flight.getFlightNumber());
         bookArrayList.add(book);
         boolean success = book.confirmReservation(flight, super.getID(), passeport);
         if (success) System.out.printf("Booked flight number %d successfully.\n", flight.getFlightNumber());

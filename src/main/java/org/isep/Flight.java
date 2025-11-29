@@ -26,6 +26,32 @@ public class Flight {
         origine.addDepartingFlight(this);
         destination.addArrivingFlight(this);
     }
+
+    public int getFlightNumber(){
+        return flightNumber;
+    }
+
+    public void assignPilot(AirplanePilot pilot){
+        this.pilot = pilot;
+        pilot.assignFlight(this);
+    }
+
+    public void assignCabin(StaffCabin cabin){
+        this.cabin = cabin;
+        cabin.assignFlight(this);
+    }
+    public boolean addPassenger(Passenger passenger){
+        if(aircraft != null && passengerList.size() < aircraft.getCapacity()){
+            passengerList.add(passenger);
+            return true;
+        }
+        else {
+            System.out.println("Flight is full or no aircraft assigned");
+            return false;
+        }
+    }
     
+
+
 
 }
