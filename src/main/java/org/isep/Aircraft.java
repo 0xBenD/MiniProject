@@ -6,24 +6,29 @@ public class Aircraft {
     private int capacity;
     private String model;
     private String registration;
+    private boolean isAvailable;
 
-    public Aircraft(int capacity, String model, String registration) {
+    public Aircraft(int capacity, String model, String registration, boolean isAvailable) {
         this.capacity = capacity;
         this.model = model;
         this.registration = registration;
+        this.isAvailable = true;
     }
+
+    
 
     public int getCapacity() {
         return capacity;
     }
-
-    public boolean verifyCapacity(int passengers){
-        if (passengers <= capacity) return true;
-        else return false;
+    public boolean checkAvailability(){
+        return isAvailable;
+    }
+    public String getRegistration(){
+        return registration;
+    }
+    public String getModel(){
+        return model;
     }
 
-    public ArrayList<String> affectFlight(Flight flight){
-        ArrayList<String> passengers = new ArrayList<>();
-        return passengers;
-    }
+
 }
