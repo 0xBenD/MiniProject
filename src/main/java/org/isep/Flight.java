@@ -1,36 +1,28 @@
 package org.isep;
 
 import java.time.Instant;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Flight {
     private int flightNumber;
-    private String origine;
-    private String destination;
-    private FlightStatus Status;
-    private Date date;
+    private Airport origine;
+    private Airport destination;
+    private String departureTime;
+    private String arrivalTime;
+    private FlightStatus status;
+    private Aircraft aircraft;
+    private ArrayList<Passenger> passengerList = new ArrayList<>();
+    private AirplanePilot pilot;
+    private StaffCabin cabin;
 
-
-
-    public Flight(int flightNumber, String origine, String destination){
+    public Flight(int flightNumber, Airport origine, Airport destination, String departureTime,String arrivalTime){
         this.flightNumber = flightNumber;
         this.origine = origine;
         this.destination = destination;
-    }
-
-    public void planFlight(){
-    }
-
-    public void cancelFlight(){
-    }
-
-    public void modifyFlight(){
-
-    }
-
-    public void listingPassenger(){
-
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.status = FlightStatus.ON_TIME;
     }
 
 }
