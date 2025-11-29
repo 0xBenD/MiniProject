@@ -6,8 +6,10 @@ import java.util.Random;
 
 public class Book {
     private int bookNumber;
-    private String Status;
-    private Date date;
+    private FlightStatus status;
+    private String date;
+    private Flight flight;
+    private int passengerID;
     private ArrayList<Integer> bookList = new ArrayList<>();
 
     public Book(int bookNumber){
@@ -23,18 +25,35 @@ public class Book {
         } while(cond);
         bookList.add(newBook);
         this.bookNumber = newBook;
-        this.date = Date.from(Instant.now());
+
+        this.date = new Date().toString();
+        this.status = FlightStatus.PENDING;
     }
 
-    public boolean confirmReservation(Flight flight, int ID,String passeport){
-
+    public boolean confirmReservation(Flight flight, int passengerID, String passeport){
+        this.flight = flight;
+        this.passengerID = passengerID;
+        this.status = FlightStatus.CONFIRMED;
+        System.out.println("Reservation " +bookNumber+ " confirmed for "+ passengerID);
+        return true;
     }
 
-    public void bookCancellation(){
-
+    public void cancelReservation(){
+        this.status = FlightStatus.CANCELED;
+        System.out.println("Reservation " +bookNumber+ " canceled");
     }
-    public void bookModification(){
 
+    public int getReservationNumber(){
+        return bookNumber;
     }
+
+    public FlightStatus getStatus(){
+        return status;
+    }
+
+    public String getDate(){
+        return date;
+    }
+
 
 }

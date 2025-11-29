@@ -20,19 +20,19 @@ public class Passenger extends Person{
         Book book = new Book();
         bookArrayList.add(book);
         boolean success = book.confirmReservation(flight, super.getID(), passeport);
-        if (success) System.out.printf("Booked flight number %d successfully.\n", flight.getFlightNumber);
-        else System.out.printf("Failed to book flight number %d.\n", flight.getFlightNumber);
+        if (success) System.out.printf("Booked flight number %d successfully.\n", flight.getFlightNumber());
+        else System.out.printf("Failed to book flight number %d.\n", flight.getFlightNumber());
     }
 
     public void cancelFlight(int bookNumber){
         for(Book b : bookArrayList){
-            if(b.getReservationNumber == bookNumber) b.cancelReservation();
+            if(b.getReservationNumber() == bookNumber) b.cancelReservation();
         }
     }
 
     public void getReservations(int bookNumber){
         for(Book b : bookArrayList){
-            if(b.getReservationNumber == bookNumber) System.out.printf("Reservation number is : %d , the date is : %s , status : ", bookNumber, b.getDate, b.getReservationNumber);
+            if(b.getReservationNumber() == bookNumber) System.out.printf("Reservation number is : %d , the date is : %s , status : ", bookNumber, b.getDate(), b.getReservationNumber());
         }
     }
 
