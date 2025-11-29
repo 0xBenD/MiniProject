@@ -15,7 +15,15 @@ public class Aircraft {
         this.isAvailable = true;
     }
 
-    
+    public void assignFlight(Flight flight){
+        if (checkAvailability()) {
+            this.isAvailable = false;
+            System.out.println("Aircraft" + registration + "assigned to flight");
+        }
+        else {
+            System.out.println("this Aircraft is not available");
+        }
+    }
 
     public int getCapacity() {
         return capacity;
