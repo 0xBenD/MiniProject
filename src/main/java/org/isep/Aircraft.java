@@ -1,7 +1,5 @@
 package org.isep;
 
-import java.util.ArrayList;
-
 public class Aircraft {
     private int capacity;
     private String model;
@@ -23,6 +21,9 @@ public class Aircraft {
         else {
             System.out.println("this Aircraft is not available");
         }
+    }
+    public void releaseAircraft(){
+        this.isAvailable = true;
     }
 
     public int getCapacity() {

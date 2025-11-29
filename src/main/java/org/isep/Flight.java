@@ -1,8 +1,5 @@
 package org.isep;
-
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Flight {
     private int flightNumber;
@@ -50,8 +47,37 @@ public class Flight {
             return false;
         }
     }
-    
+    public void listPassenger(){
+        System.out.println("Passenger List for Flight "+ flightNumber + " : ");
+        for(Passenger p : passengerList){
+            p.getInfos();
+        }
+    }
+    public void assignAircraft(Aircraft aircraft){
+        if(aircraft.checkAvailability()){
+            this.aircraft = aircraft;
+            aircraft.assignFlight(this);
+        }
+        else {
+            System.out.println("Aircraft is not available");
+        }
+    }
 
+    public void cancelFlight(){
+        this.status = FlightStatus.CANCELED;
+        if(this.aircraft != null){
+            this.aircraft.releaseAircraft();
+        }
+        System.out.println("Flight " + flightNumber + " has been canceled");
+    }
 
-
+    public Airport getOrigine(){
+        return origine;
+    }
+    public Airport getDestination(){
+        return destination;
+    }
+    public String getDepartureTime(){
+        return departureTime;
+    }
 }
