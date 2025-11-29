@@ -23,6 +23,9 @@ public class Flight {
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.status = FlightStatus.ON_TIME;
+        origine.addDepartingFlight(this);
+        destination.addArrivingFlight(this);
     }
+    
 
 }
