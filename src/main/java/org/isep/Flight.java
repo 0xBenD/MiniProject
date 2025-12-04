@@ -104,6 +104,15 @@ public class Flight {
         }
     }
 
+    public void recheduleFlights(LocalDateTime newDeparture, LocalDateTime newArrival){
+        this.departureDate = newDeparture;
+        this.arrivalDate = newArrival;
+        System.out.println("Flight " + flightNumber + " has been rescheduled");
+        if(this.aircraft != null){
+            System.out.println("Check if aircraft " + aircraft.getRegistration() + " is still available for this new dates.");
+        }
+    }
+
     public Airport getOrigine(){
         return origine;
     }

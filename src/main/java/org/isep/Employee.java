@@ -41,6 +41,17 @@ public class Employee extends Person{
         return null;
     }
 
+    public static void deleteEmployee(int empNumber){
+        Employee e = findEmployee(empNumber);
+        if(e != null){
+            allEmployees.remove(e);
+            System.out.println("Employee deleted");
+        }
+        else {
+            System.out.println("Employee not found");
+        }
+    }
+
     public String getRole(){
         return role;
     }
