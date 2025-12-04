@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Employee extends Person{
 
+    public static ArrayList<Employee> allEmployees = new ArrayList<>();
     private static ArrayList<Integer> EmpNbList = new ArrayList<>();
     private int NumberEmp;
     private String hiringDate;
@@ -25,6 +26,16 @@ public class Employee extends Person{
         } while(cond);
         EmpNbList.add(newNumber);
         this.NumberEmp = newNumber;
+        allEmployees.add(this);
+    }
+
+    public static Employee findEmployee(int empNumber){
+        for(Employee e : allEmployees){
+            if(e.getNumberEmp() == empNumber){
+                return e;
+            }
+        }
+        return null;
     }
 
     public String getRole(){
