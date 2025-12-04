@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Employee extends Person{
 
-    private ArrayList<Integer> EmpNbList = new ArrayList<>();
+    private static ArrayList<Integer> EmpNbList = new ArrayList<>();
     private int NumberEmp;
     private String hiringDate;
     private String role = "Employee";
@@ -29,6 +29,14 @@ public class Employee extends Person{
 
     public String getRole(){
         return role;
+    }
+
+    public void setRole(String role){
+        this.role = role;
+    }
+
+    public void updateRole(String newRole){
+        this.role = newRole;
     }
 
     public int getNumberEmp() {
