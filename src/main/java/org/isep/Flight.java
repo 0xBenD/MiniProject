@@ -2,6 +2,8 @@ package org.isep;
 import java.util.ArrayList;
 
 public class Flight {
+    private static ArrayList<Flight> allFlights = new ArrayList<>();
+
     private int flightNumber;
     private Airport origine;
     private Airport destination;
@@ -11,7 +13,8 @@ public class Flight {
     private Aircraft aircraft;
     private ArrayList<Passenger> passengerList = new ArrayList<>();
     private AirplanePilot pilot;
-    private StaffCabin cabin;
+
+    private ArrayList<StaffCabin> cabinCrew = new ArrayList<>();
 
     public Flight(int flightNumber, Airport origine, Airport destination, String departureTime,String arrivalTime){
         this.flightNumber = flightNumber;
@@ -22,6 +25,11 @@ public class Flight {
         this.status = FlightStatus.ON_TIME;
         origine.addDepartingFlight(this);
         destination.addArrivingFlight(this);
+        allFlights.add(this);
+    }
+
+    public static Flight scheduleFlight(int number,Airport origine, Airport destination, String departureTime, String arrivalTime){
+        return new Flight(number, origine, destination, departureTime, arrivalTime);
     }
 
     public void updateFlightTimes(String newDeparture, String newArrival ){
@@ -39,10 +47,11 @@ public class Flight {
         pilot.assignFlight(this);
     }
 
-    public void assignCabin(StaffCabin cabin){
-        this.cabin = cabin;
-        cabin.assignFlight(this);
+    public void assignCabin(StaffCabin cabinMember){
+        this.cabinCrew.add(cabinMember);
+        cabinMember.assignFlight(this);
     }
+
     public boolean addPassenger(Passenger passenger){
         if(aircraft != null && passengerList.size() < aircraft.getCapacity()){
             passengerList.add(passenger);
@@ -53,12 +62,14 @@ public class Flight {
             return false;
         }
     }
+
     public void listPassenger(){
         System.out.println("Passenger List for Flight "+ flightNumber + " : ");
         for(Passenger p : passengerList){
             p.getInfos();
         }
     }
+
     public void assignAircraft(Aircraft aircraft){
         if(aircraft.checkAvailability()){
             this.aircraft = aircraft;
@@ -75,6 +86,15 @@ public class Flight {
             this.aircraft.releaseAircraft();
         }
         System.out.println("Flight " + flightNumber + " has been canceled");
+    }
+
+    public static Flight findFlight(int flightNumber){
+        for(Flight f : allFlights){
+            if(f.getFlightNumber() == flightNumber){
+                return f;
+            }
+        }
+        return null;
     }
 
     public Airport getOrigine(){
