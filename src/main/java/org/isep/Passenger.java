@@ -56,5 +56,23 @@ public class Passenger extends Person{
         }
     }
 
+    public static Passenger findPassenger(int ID){
+        for(Passenger p : allPassengers){
+            if(p.getID() == ID){
+                return p;
+            }
+        }
+        return null;
+    }
 
+    public static void deletePassengers(int ID){
+        Passenger p = findPassenger(ID);
+        if(p != null){
+            allPassengers.remove(p);
+            System.out.println("Passenger deleted");
+        }
+        else {
+            System.out.println("Passenger not found");
+        }
+    }
 }

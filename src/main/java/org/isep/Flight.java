@@ -97,6 +97,17 @@ public class Flight {
         return null;
     }
 
+    public static void deleteFlight(int flightNumber){
+        Flight f = findFlight(flightNumber);
+        if(f != null){
+            allFlights.remove(f);
+            System.out.println("Flight deleted");
+        }
+        else {
+            System.out.println("Flight not found");
+        }
+    }
+
     public Airport getOrigine(){
         return origine;
     }
