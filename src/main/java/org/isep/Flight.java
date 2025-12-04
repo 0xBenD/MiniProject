@@ -24,6 +24,12 @@ public class Flight {
         destination.addArrivingFlight(this);
     }
 
+    public void updateFlightTimes(String newDeparture, String newArrival ){
+        this.departureTime = newDeparture;
+        this.arrivalTime = newArrival;
+        System.out.println("Flight time updated");
+    }
+
     public int getFlightNumber(){
         return flightNumber;
     }
