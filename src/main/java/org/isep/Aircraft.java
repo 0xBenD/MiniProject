@@ -1,6 +1,11 @@
 package org.isep;
 
+import java.util.ArrayList;
+
 public class Aircraft {
+
+    private static ArrayList<Aircraft> fleet = new ArrayList<>();
+
     private int capacity;
     private String model;
     private String registration;
@@ -11,6 +16,16 @@ public class Aircraft {
         this.model = model;
         this.registration = registration;
         this.isAvailable = isAvailable;
+        fleet.add(this);
+    }
+
+    public static Aircraft findAircraft(String registration){
+        for(Aircraft a : fleet){
+            if(a.getRegistration().equals(registration)){
+                return a;
+            }
+        }
+        return null;
     }
 
     public void setAvailable(boolean isAvailable){
