@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 public class Passenger extends Person{
 
+    private static ArrayList<Passenger> allPassengers = new ArrayList<>();
+
     private String passeport;
     private ArrayList<Book> bookArrayList = new ArrayList<>();
 
     public Passenger(String name, String address, String contact, String passeport){
         super(name, address, contact);
         this.passeport = passeport;
+        allPassengers.add(this);
     }
 
     public String getPasseport() {
@@ -19,9 +22,11 @@ public class Passenger extends Person{
     public void bookFlight(Flight flight, String date){
         Book book = new Book(flight.getFlightNumber(), date);
         boolean isAdded = flight.addPassenger(this);
+
         if(isAdded){
             boolean success = book.confirmReservation(flight, super.getID(), passeport);
             if (success) {
+                this.bookArrayList.add(book);
                 System.out.printf("Booked flight number %d successfully.\n", flight.getFlightNumber());
             }
         } else {
@@ -42,6 +47,12 @@ public class Passenger extends Person{
             if(b.getReservationNumber() == bookNumber) {
                 System.out.printf("Reservation number is : %d , the date is : %s , status : ", bookNumber, b.getDate(), b.getReservationNumber());
             }
+        }
+    }
+
+    public static void listAllPassengers(){
+        for(Passenger p : allPassengers){
+            p.getInfos();
         }
     }
 
