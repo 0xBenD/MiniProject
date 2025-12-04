@@ -1,5 +1,7 @@
 package org.isep;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Flight {
     private static ArrayList<Flight> allFlights = new ArrayList<>();
@@ -7,8 +9,8 @@ public class Flight {
     private int flightNumber;
     private Airport origine;
     private Airport destination;
-    private String departureTime;
-    private String arrivalTime;
+    private LocalDateTime departureDate;
+    private LocalDateTime arrivalDate;
     private FlightStatus status;
     private Aircraft aircraft;
     private ArrayList<Passenger> passengerList = new ArrayList<>();
@@ -16,12 +18,12 @@ public class Flight {
 
     private ArrayList<StaffCabin> cabinCrew = new ArrayList<>();
 
-    public Flight(int flightNumber, Airport origine, Airport destination, String departureTime,String arrivalTime){
+    public Flight(int flightNumber, Airport origine, Airport destination, LocalDateTime departureDate,LocalDateTime arrivalDate){
         this.flightNumber = flightNumber;
         this.origine = origine;
         this.destination = destination;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
         this.status = FlightStatus.ON_TIME;
         origine.addDepartingFlight(this);
         destination.addArrivingFlight(this);
@@ -29,18 +31,12 @@ public class Flight {
     }
 
     public static Flight scheduleFlight(int number,Airport origine, Airport destination, String departureTime, String arrivalTime){
-        return new Flight(number, origine, destination, departureTime, arrivalTime);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime departureDate = LocalDateTime.parse(departureTime, formatter);
+        LocalDateTime arrivalDate = LocalDateTime.parse(arrivalTime, formatter);
+        return new Flight(number, origine, destination, departureDate, arrivalDate);
     }
 
-    public void updateFlightTimes(String newDeparture, String newArrival ){
-        this.departureTime = newDeparture;
-        this.arrivalTime = newArrival;
-        System.out.println("Flight time updated");
-    }
-
-    public int getFlightNumber(){
-        return flightNumber;
-    }
 
     public void assignPilot(AirplanePilot pilot){
         this.pilot = pilot;
@@ -63,6 +59,10 @@ public class Flight {
         }
     }
 
+    public int getFlightNumber(){
+        return flightNumber;
+    }
+
     public void listPassenger(){
         System.out.println("Passenger List for Flight "+ flightNumber + " : ");
         for(Passenger p : passengerList){
@@ -71,19 +71,15 @@ public class Flight {
     }
 
     public void assignAircraft(Aircraft aircraft){
-        if(aircraft.checkAvailability()){
-            this.aircraft = aircraft;
-            aircraft.assignFlight(this);
-        }
-        else {
-            System.out.println("Aircraft is not available");
-        }
+        this.aircraft = aircraft;
+        aircraft.assignFlight(this);
     }
+
 
     public void cancelFlight(){
         this.status = FlightStatus.CANCELED;
         if(this.aircraft != null){
-            this.aircraft.releaseAircraft();
+            this.aircraft.releaseAircraft(this);
         }
         System.out.println("Flight " + flightNumber + " has been canceled");
     }
@@ -114,7 +110,11 @@ public class Flight {
     public Airport getDestination(){
         return destination;
     }
-    public String getDepartureTime(){
-        return departureTime;
+    public LocalDateTime getDepartureDate(){
+        return departureDate;
     }
+    public LocalDateTime getArrivaleDate(){
+        return arrivalDate;
+    }
+
 }

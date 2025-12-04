@@ -13,11 +13,10 @@ public class Aircraft {
 
     private ArrayList<Flight> schedule = new ArrayList<>();
 
-    public Aircraft(int capacity, String model, String registration, boolean isAvailable) {
+    public Aircraft(int capacity, String model, String registration) {
         this.capacity = capacity;
         this.model = model;
         this.registration = registration;
-        this.isAvailable = isAvailable;
         fleet.add(this);
     }
 
@@ -50,19 +49,12 @@ public class Aircraft {
         return null;
     }
 
-    /*
-    public void setAvailable(boolean isAvailable){
-        this.isAvailable = isAvailable;
+    public void releaseAircraft(Flight flight){
+        if(schedule.contains(flight)){
+            schedule.remove(flight);
+            System.out.println("Aircraft "+registration+" has been released");
+        }
     }
-
-    public void releaseAircraft(){
-        this.isAvailable = true;
-    }
-
-    public boolean checkAvailability(){
-        return isAvailable;
-    }
-    */
 
     public int getCapacity() {
         return capacity;
