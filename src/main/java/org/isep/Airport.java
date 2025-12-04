@@ -3,6 +3,8 @@ package org.isep;
 import java.util.ArrayList;
 
 public class Airport{
+    private static ArrayList<Airport> allAirports = new ArrayList<>();
+
     private String name;
     private String city;
     private String description;
@@ -13,6 +15,15 @@ public class Airport{
         this.name = name;
         this.city = city ;
         this.description = description;
+        allAirports.add(this);
+    }
+    public static Airport findAirport(String name){
+        for(Airport a : allAirports){
+            if(a.getName().equals(name)){
+                return a;
+            }
+        }
+        return null;
     }
 
     public void addDepartingFlight(Flight flight){

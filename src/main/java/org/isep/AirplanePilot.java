@@ -3,6 +3,8 @@ package org.isep;
 import java.util.ArrayList;
 
 public class AirplanePilot extends Employee{
+    public static ArrayList<AirplanePilot> allPilots = new ArrayList<>();
+
     private String licence;
     private int flightHours;
     private String role = "Airplane Pilot";
@@ -12,6 +14,13 @@ public class AirplanePilot extends Employee{
         super(name, address, contact, hiringDate);
         this.licence = licence;
         this.flightHours = flightHours;
+        super.setRole(role);
+        allPilots.add(this);
+
+    }
+
+    public static ArrayList<AirplanePilot> getAllPilots(){
+        return allPilots;
     }
 
     public String getLicence() {
