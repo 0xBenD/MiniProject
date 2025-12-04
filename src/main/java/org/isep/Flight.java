@@ -104,7 +104,7 @@ public class Flight {
         }
     }
 
-    public void recheduleFlights(LocalDateTime newDeparture, LocalDateTime newArrival){
+    public void rescheduleFlight(LocalDateTime newDeparture, LocalDateTime newArrival){
         this.departureDate = newDeparture;
         this.arrivalDate = newArrival;
         System.out.println("Flight " + flightNumber + " has been rescheduled");
