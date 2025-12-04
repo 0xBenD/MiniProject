@@ -5,13 +5,14 @@ import java.util.Date;
 import java.util.Random;
 
 public class Book {
+    private static ArrayList<Book> allBooks = new ArrayList<>();
+    private static ArrayList<Integer> bookList = new ArrayList<>();
+
     private int bookNumber;
     private FlightStatus status;
     private String date;
     private Flight flight;
     private int passengerID;
-
-    private static ArrayList<Integer> bookList = new ArrayList<>();
 
     public Book(int bookNumber, String date){
         Random randomInt = new Random();
@@ -30,9 +31,9 @@ public class Book {
 
         bookList.add(newBook);
         this.bookNumber = newBook;
-
         this.date = date;
         this.status = FlightStatus.PENDING;
+        allBooks.add(this);
     }
 
     public boolean confirmReservation(Flight flight, int passengerID, String passeport){
@@ -51,6 +52,15 @@ public class Book {
     public void updateDate(String newDate){
         this.date = newDate;
         System.out.println("Reservation date " +bookNumber+ " updated");
+    }
+
+    public static Book findBook(int id){
+        for(Book b : allBooks){
+            if(b.getReservationNumber() == id){
+                return b;
+            }
+        }
+        return null;
     }
 
     public int getReservationNumber(){
