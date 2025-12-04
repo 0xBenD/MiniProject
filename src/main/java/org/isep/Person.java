@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Person {
     private static ArrayList<Integer> IDList = new ArrayList<>();
+
     private int ID;
     private String name;
     private String address;
@@ -32,8 +33,20 @@ public class Person {
         System.out.println("ID : " + ID + "\nname : " + name + "\naddress: " + address + "\n contact : " + contact);
     }
 
+    public void setAddress(String address){
+        this.address = address;
+    }
+
+    public void setContact(String contact){
+        this.contact = contact;
+    }
+
     public int getID(){
         return ID;
+    }
+
+    public String getName(){
+        return name;
     }
 
 }

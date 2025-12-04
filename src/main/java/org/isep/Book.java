@@ -10,23 +10,28 @@ public class Book {
     private String date;
     private Flight flight;
     private int passengerID;
-    private ArrayList<Integer> bookList = new ArrayList<>();
 
-    public Book(int bookNumber){
+    private static ArrayList<Integer> bookList = new ArrayList<>();
+
+    public Book(int bookNumber, String date){
         Random randomInt = new Random();
         boolean cond;
         int newBook;
         do {
             cond = false;
-            newBook = randomInt.nextInt();
-            for (int i = 0; i < bookList.size(); i++) {
-                if(bookList.get(i) == newBook) cond = true;
+            newBook = randomInt.nextInt(100000);
+            for (int id : bookList) {
+                if (id == newBook) {
+                    cond = true;
+                    break;
+                }
             }
-        } while(cond);
+        }while (cond);
+
         bookList.add(newBook);
         this.bookNumber = newBook;
 
-        this.date = new Date().toString();
+        this.date = date;
         this.status = FlightStatus.PENDING;
     }
 
@@ -41,6 +46,11 @@ public class Book {
     public void cancelReservation(){
         this.status = FlightStatus.CANCELED;
         System.out.println("Reservation " +bookNumber+ " canceled");
+    }
+
+    public void updateDate(String newDate){
+        this.date = newDate;
+        System.out.println("Reservation date " +bookNumber+ " updated");
     }
 
     public int getReservationNumber(){
