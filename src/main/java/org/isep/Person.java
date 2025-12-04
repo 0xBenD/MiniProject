@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Person {
+
+    private static ArrayList<Person> allPeople = new ArrayList<>();
     private static ArrayList<Integer> IDList = new ArrayList<>();
 
     private int ID;
@@ -27,10 +29,20 @@ public class Person {
         } while(cond);
         IDList.add(newID);
         this.ID = newID;
+        allPeople.add(this);
     }
 
     public void getInfos(){
         System.out.println("ID : " + ID + "\nname : " + name + "\naddress: " + address + "\n contact : " + contact);
+    }
+
+    public static Person findPerson(int ID){
+        for(Person p : allPeople){
+            if(p.getID() == ID){
+                return p;
+            }
+        }
+        return null;
     }
 
     public void setAddress(String address){
