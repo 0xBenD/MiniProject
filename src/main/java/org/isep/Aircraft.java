@@ -10,7 +10,11 @@ public class Aircraft {
         this.capacity = capacity;
         this.model = model;
         this.registration = registration;
-        this.isAvailable = true;
+        this.isAvailable = isAvailable;
+    }
+
+    public void setAvailable(boolean isAvailable){
+        this.isAvailable = isAvailable;
     }
 
     public void assignFlight(Flight flight){
