@@ -21,6 +21,9 @@ public class Book {
         do {
             cond = false;
             newBook = randomInt.nextInt(100000);
+            if (newBook < 0){
+                newBook *= -1;
+            }
             for (int id : bookList) {
                 if (id == newBook) {
                     cond = true;

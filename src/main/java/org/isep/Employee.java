@@ -19,7 +19,10 @@ public class Employee extends Person{
         int newNumber;
         do {
             cond = false;
-            newNumber = randomInt.nextInt();
+            newNumber = randomInt.nextInt(100000);
+            if (newNumber < 0){
+                newNumber *= -1;
+            }
             for (int i = 0; i < EmpNbList.size(); i++) {
                 if(EmpNbList.get(i) == newNumber) cond = true;
             }

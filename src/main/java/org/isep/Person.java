@@ -22,10 +22,14 @@ public class Person {
         int newID;
         do {
             cond = false;
-            newID = randomInt.nextInt();
-            for (int i = 0; i < IDList.size(); i++) {
+            newID = randomInt.nextInt(100000);
+            if (newID < 0){
+                newID *= -1;
+            }
+            for(int i = 0; i < IDList.size(); i++){
                 if(IDList.get(i) == newID) cond = true;
             }
+
         } while(cond);
         IDList.add(newID);
         this.ID = newID;
