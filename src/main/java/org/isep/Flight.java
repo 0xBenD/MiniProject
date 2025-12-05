@@ -139,6 +139,9 @@ public class Flight {
         FileWriter fw = new FileWriter(file, false);
         for(Flight a : allFlights) WriteToFile.write(PATHNAME, a.toCSV());
     }
+    public static ArrayList<Flight> getAllFlights(){
+        return allFlights;
+    }
 
     public Airport getOrigine(){
         return origine;
