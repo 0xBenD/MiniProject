@@ -1,27 +1,31 @@
 package org.isep;
 import java.io.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        ArrayList<String> data = FileReaderWithBufferedReader.readCSV("src/main/resources/flight.txt", new ArrayList<String>());
-        Airport Paris = new Airport("Paris", "Paris", "Paris");
-        Airport Rome = new Airport("Rome", "Rome", "Rome");
-        Airport Lyon = new Airport("Lyon", "Lyon", "Lyon");
-        Airport Prague = new Airport("Prague", "Prague", "Prague");
-        Airport Nice = new Airport("Nice", "Nice", "Nice");
-        Airport Bale = new Airport("Bale", "Bale", "Bale");
-        //Flight flight = new Flight(parseInt(data.get(0)), Airport.findAirport(data.get(1)), Airport.findAirport(data.get(2)), Flight.Stringto Date(data.get(3)), Flight.StringtoDate(data.get(4)));
-        ArrayList<Flight> flightList = new ArrayList<>();
-        for(int i = 0; i < data.size(); i+=5) {
-            flightList.add(new Flight(parseInt(data.get(i)), Airport.findAirport(data.get(i+1)), Airport.findAirport(data.get(i+2)), Flight.StringtoDate(data.get(i+3)), Flight.StringtoDate(data.get(i+4))));
-        }
 
-        for(Flight a : flightList) System.out.println(a);
-        System.out.println(data);
+        ArrayList<String> dataPassenger = FileReaderWithBufferedReader.readCSV("src/main/resources/passenger.csv", new ArrayList<String>());
+        for (int i = 0; i < dataPassenger.size(); i += 4) new Passenger(dataPassenger.get(i), dataPassenger.get(i + 1), dataPassenger.get(i + 2), dataPassenger.get(i+3));
+
+        ArrayList<String> dataStaffCabin = FileReaderWithBufferedReader.readCSV("src/main/resources/staffcabin.csv", new ArrayList<String>());
+        for (int i = 0; i < dataStaffCabin.size(); i += 5) new StaffCabin(dataStaffCabin.get(i), dataStaffCabin.get(i + 1), dataStaffCabin.get(i + 2), dataStaffCabin.get(i+3), dataStaffCabin.get(i+4));
+
+        ArrayList<String> dataPilot = FileReaderWithBufferedReader.readCSV("src/main/resources/pilot.csv", new ArrayList<String>());
+        for (int i = 0; i < dataPilot.size(); i += 6) new AirplanePilot(dataPilot.get(i), dataPilot.get(i + 1), dataPilot.get(i + 2), dataPilot.get(i+3), dataPilot.get(i+4), parseInt(dataPilot.get(i+5)));
+
+        ArrayList<String> dataAirport = FileReaderWithBufferedReader.readCSV("src/main/resources/airport.csv", new ArrayList<String>());
+        for (int i = 0; i < dataAirport.size(); i += 3) new Airport(dataAirport.get(i), dataAirport.get(i + 1), dataAirport.get(i + 2));
+
+        ArrayList<String> dataFlight = FileReaderWithBufferedReader.readCSV("src/main/resources/flight.csv", new ArrayList<String>());
+        for (int i = 0; i < dataFlight.size(); i += 5) new Flight(parseInt(dataFlight.get(i)), Airport.findAirport(dataFlight.get(i + 1)), Airport.findAirport(dataFlight.get(i + 2)), Flight.StringtoDate(dataFlight.get(i + 3)), Flight.StringtoDate(dataFlight.get(i + 4)));
+
+        for (Flight a : Flight.getAllFlights) System.out.println(a);
+        System.out.println(dataFlight);
     }
 }
+
+// DON'T FORGET TO ADD FLIGHT STATUS
