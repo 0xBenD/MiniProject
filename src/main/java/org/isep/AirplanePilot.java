@@ -48,7 +48,7 @@ public class AirplanePilot extends Employee{
         return this.getName() + "," + this.getAddress() + "," + this.getContact() + "," + this.getHiringDate() + "," + licence + "," + flightHours + "\n";
     }
 
-    public static void updateFlightCSV() throws IOException {
+    public static void updatePilotCSV() throws IOException {
         File file = new File(PATHNAME);
         FileWriter fw = new FileWriter(file, false);
         for(AirplanePilot a : allPilots) WriteToFile.write(PATHNAME, a.toCSV());
