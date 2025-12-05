@@ -65,4 +65,12 @@ public class Person {
         return name;
     }
 
+    public String getAddress(){
+        return address;
+    }
+
+    public String getContact(){
+        return contact;
+    }
+
 }

@@ -1,9 +1,14 @@
 package org.isep;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AirplanePilot extends Employee{
     public static ArrayList<AirplanePilot> allPilots = new ArrayList<>();
+
+    private static final String PATHNAME = "src/main/resources/pilot.csv";
 
     private String licence;
     private int flightHours;
@@ -37,5 +42,15 @@ public class AirplanePilot extends Employee{
 
     public ArrayList<Flight> obtainFlight(){
         return assignedFlights;
+    }
+
+    public String toCSV() {
+        return this.getName() + "," + this.getAddress() + "," + this.getContact() + "," + this.getHiringDate() + "," + licence + "," + flightHours + "\n";
+    }
+
+    public static void updateFlightCSV() throws IOException {
+        File file = new File(PATHNAME);
+        FileWriter fw = new FileWriter(file, false);
+        for(AirplanePilot a : allPilots) WriteToFile.write(PATHNAME, a.toCSV());
     }
 }
