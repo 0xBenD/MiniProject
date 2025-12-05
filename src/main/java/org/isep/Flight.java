@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Flight {
     private static ArrayList<Flight> allFlights = new ArrayList<>();
 
-    private static String PATHNAME = "src/main/resources/flight.csv"
+    private static final String PATHNAME = "src/main/resources/flight.csv"
 
     private int flightNumber;
     private Airport origine;
@@ -131,7 +131,7 @@ public class Flight {
     }
 
     public String toCSV() {
-        return flightNumber + "," + origine + "," + destination + "," + departureDate.toString() + "," + arrivalDate.toString();
+        return flightNumber + "," + origine + "," + destination + "," + departureDate.toString() + "," + arrivalDate.toString() + "\n";
     }
 
     public static void updateFlightCSV() throws IOException {

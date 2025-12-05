@@ -1,10 +1,15 @@
 package org.isep;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Passenger extends Person{
 
     private static ArrayList<Passenger> allPassengers = new ArrayList<>();
+
+    private static final String PATHNAME = "src/main/resources/passenger.csv";
 
     private String passeport;
     private ArrayList<Book> bookArrayList = new ArrayList<>();
@@ -74,5 +79,15 @@ public class Passenger extends Person{
         else {
             System.out.println("Passenger not found");
         }
+    }
+
+    public String toCSV() {
+        return this.getName() + "," + this.getAddress() + "," + this.getContact() + "," + passeport + "\n";
+    }
+
+    public static void updateFlightCSV() throws IOException {
+        File file = new File(PATHNAME);
+        FileWriter fw = new FileWriter(file, false);
+        for(Passenger a : allPassengers) WriteToFile.write(PATHNAME, a.toCSV());
     }
 }
