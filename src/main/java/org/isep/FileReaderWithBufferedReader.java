@@ -8,17 +8,17 @@ import java.util.ArrayList;
 
 public class FileReaderWithBufferedReader {
 
-    public static ArrayList<String> readFile(String file) throws IOException{
+    public static ArrayList<String> readCSV(String file, ArrayList<String> data) throws IOException{
 
-        ArrayList<String> data = new ArrayList<>();
+        ArrayList<String> tempdata = new ArrayList<>();
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         String curLine;
         while ((curLine = bufferedReader.readLine()) != null){      //process the line as required
             String[] temp = curLine.split(",");
-            for(String a : temp) data.add(a);
+            for(String a : temp) tempdata.add(a);
         }
         bufferedReader.close();
-        return data;
+        return tempdata;
         }
 }
 

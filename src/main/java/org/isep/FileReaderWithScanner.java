@@ -15,6 +15,7 @@ public class FileReaderWithScanner {
         scanner.useDelimiter(",");
         while(scanner.hasNext()){
             data.add(scanner.next());
+            if (data.getLast() == "\n") break;
         }
         scanner.close();
         return data;

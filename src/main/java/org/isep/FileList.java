@@ -10,7 +10,7 @@ public class FileList {
 
         if(list != null){
             for(int i = 0; i < list.length; i++) System.out.println(list[i]);
-            for(int i = 0; i < list.length; i++) FileReaderWithBufferedReader.readFile("src/main/resources/"+list[i]);
+            //for(int i = 0; i < list.length; i++) FileReaderWithBufferedReader.readFile("src/main/resources/"+list[i]);
         }
         else System.err.println("Invalid Folder Name");
     }
