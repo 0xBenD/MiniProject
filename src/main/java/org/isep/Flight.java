@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Flight {
     private static ArrayList<Flight> allFlights = new ArrayList<>();
 
-    private static final String PATHNAME = "src/main/resources/flight.csv"
+    private static final String PATHNAME = "src/main/resources/flight.csv";
 
     private int flightNumber;
     private Airport origine;
