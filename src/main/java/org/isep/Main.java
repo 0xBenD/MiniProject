@@ -29,3 +29,4 @@ public class Main {
 }
 
 // DON'T FORGET TO ADD FLIGHT STATUS
+// NEED A GETTER FOR ALL CSV eg. getAllFlights
