@@ -23,7 +23,7 @@ public class Main {
         ArrayList<String> dataFlight = FileReaderWithBufferedReader.readCSV("src/main/resources/flight.csv", new ArrayList<String>());
         for (int i = 0; i < dataFlight.size(); i += 5) new Flight(parseInt(dataFlight.get(i)), Airport.findAirport(dataFlight.get(i + 1)), Airport.findAirport(dataFlight.get(i + 2)), Flight.StringtoDate(dataFlight.get(i + 3)), Flight.StringtoDate(dataFlight.get(i + 4)));
 
-        for (Flight a : Flight.getAllFlights) System.out.println(a);
+        for (Flight a : Flight.getAllFlights()) System.out.println(a);
         System.out.println(dataFlight);
     }
 }
