@@ -1,5 +1,5 @@
-To350 , Paris , Rome , 25-12 , 10:15
-To761 , Lyon , Prague , 25-12 , 12:25
-To235 , Paris , Nice , 25-12 , 12:25
-To443 , Nice , Paris , 26-12 , 06:15
-To112 , Bale , Prague , 26-12 , 11:55
+350,Paris,Rome,25-12,10:15
+761,Lyon,Prague,25-12,12:25
+235,Paris,Nice,25-12,12:25
+443,Nice,Paris,26-12,06:15
+112,Bale,Prague,26-12,11:55

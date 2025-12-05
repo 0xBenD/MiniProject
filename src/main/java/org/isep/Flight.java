@@ -37,6 +37,12 @@ public class Flight {
         return new Flight(number, origine, destination, departureDate, arrivalDate);
     }
 
+    public static LocalDateTime StringtoDate(String time){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime date = LocalDateTime.parse(time, formatter);
+        return date;
+    }
+
 
     public void assignPilot(AirplanePilot pilot){
         this.pilot = pilot;
