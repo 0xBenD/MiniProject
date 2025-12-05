@@ -1,10 +1,16 @@
 package org.isep;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 public class Flight {
     private static ArrayList<Flight> allFlights = new ArrayList<>();
+
+    private static String PATHNAME = "src/main/resources/flight.csv"
 
     private int flightNumber;
     private Airport origine;
@@ -122,6 +128,16 @@ public class Flight {
     @Override
     public String toString() {
         return flightNumber + " origin: "+ origine;
+    }
+
+    public String toCSV() {
+        return flightNumber + "," + origine + "," + destination + "," + departureDate.toString() + "," + arrivalDate.toString();
+    }
+
+    public static void updateFlightCSV() throws IOException {
+        File file = new File(PATHNAME);
+        FileWriter fw = new FileWriter(file, false);
+        for(Flight a : allFlights) WriteToFile.write(PATHNAME, a.toCSV());
     }
 
     public Airport getOrigine(){

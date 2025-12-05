@@ -8,10 +8,8 @@ import java.io.IOException;
 
 public class WriteToFile{
 
-    public static void main(String[] args) throws IOException {
-        String content = "Content to write to file";
-        //Name and path of the file
-        File file = new File("src/main/resources/writefile.txt");
+    public static void write(String pathname, String content) throws IOException {
+        File file = new File(pathname);
         if (!file.exists()) {
             file.createNewFile();
         }
