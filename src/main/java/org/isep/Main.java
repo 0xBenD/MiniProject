@@ -1,8 +1,11 @@
 package org.isep;
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
+import java.io.*;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        ArrayList<String> data = FileReaderWithScanner.readCSV("flight.txt", new ArrayList<String>());
     }
 }
