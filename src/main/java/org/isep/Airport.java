@@ -1,9 +1,15 @@
 package org.isep;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Airport{
     private static ArrayList<Airport> allAirports = new ArrayList<>();
+
+    private static final String PATHNAME = "src/main/resources/airport.csv";
+
 
     private String name;
     private String city;
@@ -40,5 +46,15 @@ public class Airport{
 
     public String getCity(){
         return city;
+    }
+
+    public String toCSV() {
+        return this.getName() + "," + city + "," + description + "\n";
+    }
+
+    public static void updateAirportCSV() throws IOException {
+        File file = new File(PATHNAME);
+        FileWriter fw = new FileWriter(file, false);
+        for (Airport a : allAirports) WriteToFile.write(PATHNAME, a.toCSV());
     }
 }
