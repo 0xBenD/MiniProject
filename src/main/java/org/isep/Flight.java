@@ -119,6 +119,11 @@ public class Flight {
         }
     }
 
+    @Override
+    public String toString() {
+        return flightNumber + " origin: "+ origine;
+    }
+
     public Airport getOrigine(){
         return origine;
     }
