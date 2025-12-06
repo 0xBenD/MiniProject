@@ -66,6 +66,10 @@ public class Book {
         return null;
     }
 
+    public static ArrayList<Book> getAllBooks(){
+        return allBooks;
+    }
+
     public int getReservationNumber(){
         return bookNumber;
     }
@@ -76,6 +80,15 @@ public class Book {
 
     public String getDate(){
         return date;
+    }
+
+    public Flight getFlight(){
+        return flight;
+    }
+
+    @Override
+    public String toString(){
+        return "Book number: " + bookNumber + " status: " + status + " date: " + date + " flight: " + flight + " passenger ID: " + passengerID + "\n";
     }
 
 

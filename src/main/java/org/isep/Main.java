@@ -2,14 +2,23 @@ package org.isep;
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.random.RandomGenerator;
+import java.util.stream.Stream;
 
+import static java.lang.Integer.max;
 import static java.lang.Integer.parseInt;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         readAlldata();
         testReadData();
+        assignAircraftTest();
+        simulation(100);
         updateAllData();
+        for(Book book : Book.getAllBooks()) System.out.println(book);
+        displayStats();
     }
 
     public static void readAlldata() throws IOException {
@@ -65,6 +74,54 @@ public class Main {
 
         System.out.println("\nUpdating Passengers' info\n");
         Passenger.updatePassengerCSV();
+    }
+
+    public static void assignAircraftTest(){
+        for(Flight a : Flight.getAllFlights()){
+            a.assignAircraft(new Aircraft(100,"A320","Test"+a.getFlightNumber()));
+        }
+    }
+
+    public static void simulation(int nb){
+        Random randInt = new Random();
+        for(int i = 0; i < nb; i++) {
+            Passenger tempPassenger = Passenger.getAllPassengers().get(randInt.nextInt(Passenger.getAllPassengers().size()-1));
+            Flight tempFlight = Flight.getAllFlights().get(randInt.nextInt(Flight.getAllFlights().size()-1));
+            tempPassenger.bookFlight(tempFlight,tempFlight.getDepartureDate().toString());
+        }
+    }
+
+    public static void displayStats(){
+        HashMap<Airport,Integer> destinationData = new HashMap<>();
+        HashMap<Airport,Integer> departureData = new HashMap<>();
+        for(Airport airport : Airport.getAllAirports()){
+            destinationData.put(airport,0);
+            departureData.put(airport,0);
+        }
+        for(Book book : Book.getAllBooks()){
+            if (book.getFlight() != null) {
+                destinationData.put(book.getFlight().getDestination(), destinationData.get(book.getFlight().getDestination()) + 1);
+                departureData.put(book.getFlight().getOrigine(), departureData.get(book.getFlight().getOrigine()) + 1);
+            }
+        }
+        HashMap<Integer,Airport> popularDestination = new HashMap<>();
+        HashMap<Integer,Airport> fledDepartures = new HashMap<>();
+        ArrayList<Integer> sortDestination = new ArrayList<>();
+        ArrayList<Integer> sortDeparture = new ArrayList<>();
+        for(Airport airport : Airport.getAllAirports()){
+            int tempNbDestination = destinationData.get(airport);
+            if(!popularDestination.containsKey(tempNbDestination)) sortDestination.add(tempNbDestination);
+            popularDestination.put(tempNbDestination,airport);
+            int tempNbDeparture = departureData.get(airport);
+            if(!fledDepartures.containsKey(tempNbDeparture)) sortDeparture.add(tempNbDeparture);
+            fledDepartures.put(tempNbDeparture,airport);
+        }
+        sortDestination.sort(null);
+        sortDeparture.sort(null);
+        System.out.println("Most popular destinations : \n");
+        for (int i = sortDestination.size()-1 ; i >= 0; i--) System.out.println(popularDestination.get(sortDestination.get(i))+ ": " + sortDestination.get(i) + " tourists");
+        System.out.println("\nMost fled departures : \n");
+        for (int i = sortDeparture.size()-1 ; i >= 0; i--) System.out.println(fledDepartures.get(sortDeparture.get(i))+ ": " + sortDeparture.get(i) + " tourists");
     }
 }
 
