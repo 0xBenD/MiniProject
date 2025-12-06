@@ -127,7 +127,7 @@ public class Flight {
 
     @Override
     public String toString() {
-        return flightNumber + " origin: "+ origine;
+        return flightNumber + " origin: " + origine + " destination: " + destination + " departure date: " + departureDate.toString() + " arrival date: " + arrivalDate.toString() ;
     }
 
     public String toCSV() {

@@ -57,4 +57,13 @@ public class Airport{
         FileWriter fw = new FileWriter(file, false);
         for (Airport a : allAirports) WriteToFile.write(PATHNAME, a.toCSV());
     }
+
+    public static ArrayList<Airport> getAllAirports(){
+        return allAirports;
+    }
+
+    @Override
+    public String toString(){
+        return name + " " + city + " " + description;
+    }
 }

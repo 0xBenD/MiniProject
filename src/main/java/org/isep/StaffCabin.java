@@ -48,4 +48,9 @@ public class StaffCabin extends Employee{
         FileWriter fw = new FileWriter(file, false);
         for(StaffCabin a : allCabinStaff) WriteToFile.write(PATHNAME, a.toCSV());
     }
+
+    @Override
+    public String toString(){
+        return this.getName() + " qualification: " + qualification;
+    }
 }

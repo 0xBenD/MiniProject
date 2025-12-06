@@ -53,4 +53,9 @@ public class AirplanePilot extends Employee{
         FileWriter fw = new FileWriter(file, false);
         for(AirplanePilot a : allPilots) WriteToFile.write(PATHNAME, a.toCSV());
     }
+
+    @Override
+    public String toString(){
+        return this.getName() + " " + " licence:" + licence + " flight hours: " + flightHours;
+    }
 }

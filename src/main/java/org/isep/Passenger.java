@@ -81,6 +81,10 @@ public class Passenger extends Person{
         }
     }
 
+    public static ArrayList<Passenger> getAllPassengers(){
+        return allPassengers;
+    }
+
     public String toCSV() {
         return this.getName() + "," + this.getAddress() + "," + this.getContact() + "," + passeport + "\n";
     }
@@ -89,5 +93,10 @@ public class Passenger extends Person{
         File file = new File(PATHNAME);
         FileWriter fw = new FileWriter(file, false);
         for(Passenger a : allPassengers) WriteToFile.write(PATHNAME, a.toCSV());
+    }
+
+    @Override
+    public String toString(){
+        return this.getName() + " passport: " + passeport;
     }
 }
