@@ -37,14 +37,14 @@ public class Flight {
     }
 
     public static Flight scheduleFlight(int number,Airport origine, Airport destination, String departureTime, String arrivalTime){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime departureDate = LocalDateTime.parse(departureTime, formatter);
         LocalDateTime arrivalDate = LocalDateTime.parse(arrivalTime, formatter);
         return new Flight(number, origine, destination, departureDate, arrivalDate);
     }
 
     public static LocalDateTime StringtoDate(String time){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime date = LocalDateTime.parse(time, formatter);
         return date;
     }
@@ -131,7 +131,7 @@ public class Flight {
     }
 
     public String toCSV() {
-        return flightNumber + "," + origine.getName() + "," + destination.getName() + "," + departureDate.getYear() + "-" + departureDate.getMonthValue() + "-" + departureDate.getDayOfMonth() + " " + departureDate.getHour() + ":" + departureDate.getMinute() + "," + arrivalDate.getYear() + "-" + arrivalDate.getMonthValue() + "-" + arrivalDate.getDayOfMonth() + " " + arrivalDate.getHour() + ":" + arrivalDate.getMinute() + "\n";
+        return flightNumber + "," + origine.getName() + "," + destination.getName() + "," + departureDate.toString() + "," + arrivalDate.toString() + "\n";
     }
 
     public static void updateFlightCSV() throws IOException {
