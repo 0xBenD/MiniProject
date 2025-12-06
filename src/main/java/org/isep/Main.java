@@ -7,18 +7,9 @@ import static java.lang.Integer.parseInt;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
         readAlldata();
-        System.out.println("\nTest for all Airports\n");
-        for (Airport a : Airport.getAllAirports()) System.out.println(a);
-        System.out.println("\nTest for all flights\n");
-        for (Flight a : Flight.getAllFlights()) System.out.println(a);
-        System.out.println("\nTest for all staff\n");
-        for (StaffCabin a : StaffCabin.getAllCabinStaff()) System.out.println(a);
-        System.out.println("\nTest for all pilots\n");
-        for (AirplanePilot a : AirplanePilot.getAllPilots()) System.out.println(a);
-        System.out.println("\nTest for all passengers\n");
-        for (Passenger a : Passenger.getAllPassengers()) System.out.println(a);
+        testReadData();
+        updateAllData();
     }
 
     public static void readAlldata() throws IOException {
@@ -38,6 +29,42 @@ public class Main {
         ArrayList<String> dataFlight = FileReaderWithBufferedReader.readCSV("src/main/resources/flight.csv", new ArrayList<String>());
         for (int i = 0; i < dataFlight.size(); i += 5) new Flight(parseInt(dataFlight.get(i)), Airport.findAirport(dataFlight.get(i + 1)), Airport.findAirport(dataFlight.get(i + 2)), Flight.StringtoDate(dataFlight.get(i + 3)), Flight.StringtoDate(dataFlight.get(i + 4)));
 
+    }
+
+    public static void testReadData(){
+        System.out.println("\nTest for all Airports\n");
+        for (Airport a : Airport.getAllAirports()) System.out.println(a);
+
+        System.out.println("\nTest for all flights\n");
+        for (Flight a : Flight.getAllFlights()) System.out.println(a);
+
+        System.out.println("\nTest for all staff\n");
+        for (StaffCabin a : StaffCabin.getAllCabinStaff()) System.out.println(a);
+
+        System.out.println("\nTest for all pilots\n");
+        for (AirplanePilot a : AirplanePilot.getAllPilots()) System.out.println(a);
+
+        System.out.println("\nTest for all passengers\n");
+        for (Passenger a : Passenger.getAllPassengers()) System.out.println(a);
+    }
+
+
+
+    public static void updateAllData() throws IOException {
+        System.out.println("\nUpdating Airports' info\n");
+        Airport.updateAirportCSV();
+
+        System.out.println("\nUpdating Flights' info\n");
+        Flight.updateFlightCSV();
+
+        System.out.println("\nUpdating Staff's info\n");
+        StaffCabin.updateStaffCabinCSV();
+
+        System.out.println("\nUpdating Pilots' info\n");
+        AirplanePilot.updatePilotCSV();
+
+        System.out.println("\nUpdating Passengers' info\n");
+        Passenger.updatePassengerCSV();
     }
 }
 

@@ -131,7 +131,7 @@ public class Flight {
     }
 
     public String toCSV() {
-        return flightNumber + "," + origine + "," + destination + "," + departureDate.toString() + "," + arrivalDate.toString() + "\n";
+        return flightNumber + "," + origine.getName() + "," + destination.getName() + "," + departureDate.getYear() + "-" + departureDate.getMonthValue() + "-" + departureDate.getDayOfMonth() + " " + departureDate.getHour() + ":" + departureDate.getMinute() + "," + arrivalDate.getYear() + "-" + arrivalDate.getMonthValue() + "-" + arrivalDate.getDayOfMonth() + " " + arrivalDate.getHour() + ":" + arrivalDate.getMinute() + "\n";
     }
 
     public static void updateFlightCSV() throws IOException {

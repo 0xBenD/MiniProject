@@ -40,7 +40,7 @@ public class StaffCabin extends Employee{
     }
 
     public String toCSV() {
-        return this.getName() + "," + this.getAddress() + "," + this.getContact() + "," + this.getAddress() + "," + qualification + "\n";
+        return this.getName() + "," + this.getAddress() + "," + this.getContact() + "," + this.getHiringDate() + "," + qualification + "\n";
     }
 
     public static void updateStaffCabinCSV() throws IOException {
