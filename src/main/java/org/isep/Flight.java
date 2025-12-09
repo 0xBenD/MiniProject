@@ -1,4 +1,6 @@
 package org.isep;
+import org.isep.FileClasses.WriteToFile;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

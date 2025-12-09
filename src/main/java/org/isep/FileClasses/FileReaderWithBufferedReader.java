@@ -1,4 +1,4 @@
-package org.isep;
+package org.isep.FileClasses;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,13 +1,12 @@
 package org.isep;
+import org.isep.FileClasses.FileReaderWithBufferedReader;
+
 import java.io.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.random.RandomGenerator;
-import java.util.stream.Stream;
 
-import static java.lang.Integer.max;
 import static java.lang.Integer.parseInt;
 
 public class Main {
