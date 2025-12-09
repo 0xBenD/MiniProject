@@ -3,9 +3,11 @@ import org.isep.FileClasses.FileReaderWithBufferedReader;
 
 import java.io.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
@@ -15,6 +17,7 @@ public class Main {
         testReadData();
         assignAircraftTest();
         simulation(100);
+        Flight.addFlight();
         updateAllData();
         for(Book book : Book.getAllBooks()) System.out.println(book);
         displayStats();
@@ -122,6 +125,7 @@ public class Main {
         System.out.println("\nMost fled departures : \n");
         for (int i = sortDeparture.size()-1 ; i >= 0; i--) System.out.println(fledDepartures.get(sortDeparture.get(i))+ ": " + sortDeparture.get(i) + " tourists");
     }
+
 }
 
 // DON'T FORGET TO ADD FLIGHT STATUS

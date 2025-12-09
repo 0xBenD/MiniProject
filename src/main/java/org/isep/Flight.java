@@ -4,9 +4,12 @@ import org.isep.FileClasses.WriteToFile;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+import java.util.Scanner;
 
 
 public class Flight {
@@ -105,6 +108,78 @@ public class Flight {
             }
         }
         return null;
+    }
+
+    public static void addFlight(){
+        Scanner scanner = new Scanner(System.in);
+        int number = 0;
+        Airport destinationAirport = null;
+        Airport originAirport = null;
+        LocalDateTime departureDate;
+        LocalDateTime arrivalDate;
+        boolean nbCorrect = false;
+        do{
+            System.out.println("Please enter Flight's number");
+            try{
+                number = Integer.parseInt(scanner.nextLine());
+                nbCorrect = true;
+                for(Flight f : allFlights){
+                    if(f.getFlightNumber() == number){
+                        nbCorrect = false;
+                        System.out.println("Flight number must be new!");
+                    }
+                }
+            }
+            catch(NumberFormatException e){
+                System.out.println("Please enter a correct number!");
+            }
+        }while(!nbCorrect);
+        boolean originCorrect = false;
+        do {
+            System.out.println("Please enter Flight's origin");
+            String origin = scanner.nextLine();
+            for(Airport airport : Airport.getAllAirports()) {
+                if(Objects.equals(airport.getName(), origin)) {
+                    originCorrect = true;
+                    originAirport = airport;
+                }
+            }
+        } while(!originCorrect);
+        boolean destinationCorrect = false;
+        do {
+            System.out.println("Please enter Flight's destination");
+            String destination = scanner.nextLine();
+            for(Airport airport : Airport.getAllAirports()) {
+                if(Objects.equals(airport.getName(), destination)) {
+                    destinationCorrect = true;
+                    destinationAirport = airport;
+                }
+            }
+        } while(!destinationCorrect);
+        while(true) {
+            System.out.println("Please enter Flight's departure time");
+            try {
+                String time = scanner.nextLine();
+                departureDate = StringtoDate(time);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Correct format is yyyy-MM-ddTHH:mm");
+            }
+        }
+        while(true) {
+            System.out.println("Please enter Flight's arrival time");
+            try {
+                String time = scanner.nextLine();
+                arrivalDate = StringtoDate(time);
+                if(arrivalDate.isAfter(departureDate)) break;
+                else System.out.println("Arrival time must be after departure time");
+            } catch (DateTimeParseException e) {
+                System.out.println("Correct format is yyyy-MM-ddTHH:mm");
+            }
+        }
+        new Flight(number, originAirport, destinationAirport, departureDate, arrivalDate);
+        System.out.println("Flight added successfully\n");
+
     }
 
     public static void deleteFlight(int flightNumber){

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Passenger extends Person{
 
@@ -70,6 +71,20 @@ public class Passenger extends Person{
             }
         }
         return null;
+    }
+
+    public static void addPassenger(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter Passenger's full name");
+        String name = scanner.nextLine();
+        System.out.println("Please enter Passenger's address");
+        String address = scanner.nextLine();
+        System.out.println("Please enter Passenger's contact");
+        String contact = scanner.nextLine();
+        System.out.println("Please enter Passenger's passport number");
+        String passport = scanner.nextLine();
+        new Passenger(name,address,contact,passport);
+        System.out.println("Passenger added successfully\n");
     }
 
     public static void deletePassengers(int ID){
