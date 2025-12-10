@@ -117,8 +117,6 @@ public class Airport{
         Scanner scanner = new Scanner(System.in);
         String nameStr = "";
         boolean cond = false;
-
-        // Affichage de la liste
         for (Airport a : allAirports) {
             System.out.println(a.getName() + " (" + a.getCity() + ")");
         }
@@ -131,19 +129,13 @@ public class Airport{
             }
             if (!cond) System.out.println("Enter an existing Airport Name");
         }
-
-        // On récupère l'objet
         Airport airport = findAirport(nameStr);
 
         if (airport != null) {
-            // Modification de la Ville
             System.out.println("Please enter new City (current: " + airport.getCity() + ")");
             String newCity = scanner.nextLine();
             if (!newCity.isEmpty()) airport.city = newCity;
 
-            // Modification de la Description
-            // Note: getCity() existe mais pas getDescription() dans votre code initial,
-            // donc j'accède directement à airport.description
             System.out.println("Please enter new Description (current: " + airport.description + ")");
             String newDesc = scanner.nextLine();
             if (!newDesc.isEmpty()) airport.description = newDesc;
