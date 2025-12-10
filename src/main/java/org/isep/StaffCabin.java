@@ -104,6 +104,43 @@ public class StaffCabin extends Employee{
         }
     }
 
+    public static void userEditStaffCabin() {
+        Scanner scanner = new Scanner(System.in);
+        int idToEdit = 0;
+        boolean cond = false;
+        for (StaffCabin p : allCabinStaff) System.out.println("Staff: " + p);
+        while (!cond) {
+            System.out.println("Please enter Employee ID to edit");
+            try {
+                idToEdit = Integer.parseInt(scanner.nextLine());
+                for (StaffCabin s : allCabinStaff){
+                    if (s.getNumberEmp() == idToEdit) cond = true;
+                }
+                if (!cond) System.out.println("Enter an existing Employee ID");
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number");
+            }
+        }
+
+        StaffCabin staffToEdit = null;
+        for (StaffCabin s : allCabinStaff) {
+            if (s.getNumberEmp() == idToEdit) staffToEdit = s;
+        }
+        if (staffToEdit != null) {
+            System.out.println("Please enter new Name (current: " + staffToEdit.getName() + ")");
+            String newName = scanner.nextLine();
+            if (!newName.isEmpty()) staffToEdit.setName(newName);
+            System.out.println("Please enter new Qualification (current: " + staffToEdit.getQualification() + ")");
+            String newQualification = scanner.nextLine();
+            if (!newQualification.isEmpty()) staffToEdit.qualification = newQualification;
+            System.out.println("Staff edited!");
+            try {
+                updateStaffCabinCSV();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     @Override
     public String toString(){
         return this.getName() + " qualification: " + qualification;
