@@ -182,6 +182,25 @@ public class Flight {
 
     }
 
+    public static void userRemoveFlight(){
+        Scanner scanner = new Scanner(System.in);
+        int ID = 0;
+        boolean cond = false;
+        for(Flight p : allFlights) System.out.println(p);
+        while(!cond) {
+            System.out.println("Please enter Flight's number");
+            try {
+                ID = Integer.parseInt(scanner.nextLine());
+                for(Flight p : allFlights) if(p.getFlightNumber() == ID) cond = true;
+                if(!cond) System.out.println("Enter an existing Flight number");
+            } catch (NumberFormatException e) {
+                System.out.println("Enter a correct number");
+            }
+        }
+        System.out.println("Removing Flight #" + ID);
+        deleteFlight(ID);
+    }
+
     public static void deleteFlight(int flightNumber){
         Flight f = findFlight(flightNumber);
         if(f != null){
@@ -191,6 +210,76 @@ public class Flight {
         else {
             System.out.println("Flight not found");
         }
+    }
+
+    public static void userEditFlight() {
+        Scanner scanner = new Scanner(System.in);
+        int ID = 0;
+        boolean cond = false;
+        for (Flight p : allFlights) System.out.println(p);
+        while (!cond) {
+            System.out.println("Please enter Flight's number");
+            try {
+                ID = Integer.parseInt(scanner.nextLine());
+                for (Flight p : allFlights) if (p.getFlightNumber() == ID) cond = true;
+                if (!cond) System.out.println("Enter an existing Flight number");
+            } catch (NumberFormatException e) {
+                System.out.println("Enter a correct number");
+            }
+        }
+        Flight editFlight = findFlight(ID);
+        Airport destinationAirport = null;
+        Airport originAirport = null;
+        LocalDateTime departureDate;
+        LocalDateTime arrivalDate;
+        boolean originCorrect = false;
+        do {
+            System.out.println("Please enter Flight's origin");
+            String origin = scanner.nextLine();
+            for(Airport airport : Airport.getAllAirports()) {
+                if(Objects.equals(airport.getName(), origin)) {
+                    originCorrect = true;
+                    originAirport = airport;
+                }
+            }
+        } while(!originCorrect);
+        boolean destinationCorrect = false;
+        do {
+            System.out.println("Please enter Flight's destination");
+            String destination = scanner.nextLine();
+            for(Airport airport : Airport.getAllAirports()) {
+                if(Objects.equals(airport.getName(), destination)) {
+                    destinationCorrect = true;
+                    destinationAirport = airport;
+                }
+            }
+        } while(!destinationCorrect);
+        while(true) {
+            System.out.println("Please enter Flight's departure time");
+            try {
+                String time = scanner.nextLine();
+                departureDate = StringtoDate(time);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Correct format is yyyy-MM-ddTHH:mm");
+            }
+        }
+        while(true) {
+            System.out.println("Please enter Flight's arrival time");
+            try {
+                String time = scanner.nextLine();
+                arrivalDate = StringtoDate(time);
+                if(arrivalDate.isAfter(departureDate)) break;
+                else System.out.println("Arrival time must be after departure time");
+            } catch (DateTimeParseException e) {
+                System.out.println("Correct format is yyyy-MM-ddTHH:mm");
+            }
+        }
+        System.out.println("Editing flight");
+        editFlight.origine = originAirport;
+        editFlight.destination = destinationAirport;
+        editFlight.rescheduleFlight(departureDate,arrivalDate);
+        System.out.println("Flight edited!");
     }
 
     public void rescheduleFlight(LocalDateTime newDeparture, LocalDateTime newArrival){

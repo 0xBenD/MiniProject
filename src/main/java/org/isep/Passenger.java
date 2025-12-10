@@ -87,6 +87,25 @@ public class Passenger extends Person{
         System.out.println("Passenger added successfully\n");
     }
 
+    public static void userRemovePassenger(){
+        Scanner scanner = new Scanner(System.in);
+        int ID = 0;
+        boolean cond = false;
+        for(Passenger p : allPassengers) System.out.println(p);
+        while(!cond) {
+            System.out.println("Please enter Passenger's ID");
+            try {
+                ID = Integer.parseInt(scanner.nextLine());
+                for(Passenger p : allPassengers) if(p.getID() == ID) cond = true;
+                if(!cond) System.out.println("Enter an existing Passenger ID");
+            } catch (NumberFormatException e) {
+                System.out.println("Enter a correct number");
+            }
+        }
+        System.out.println("Removing Passenger #" + ID);
+        deletePassengers(ID);
+    }
+
     public static void deletePassengers(int ID){
         Passenger p = findPassenger(ID);
         if(p != null){
@@ -96,6 +115,38 @@ public class Passenger extends Person{
         else {
             System.out.println("Passenger not found");
         }
+    }
+
+    public static void userEditPassenger() {
+        Scanner scanner = new Scanner(System.in);
+        int ID = 0;
+        boolean cond = false;
+        for (Passenger p : allPassengers) System.out.println(p);
+        while (!cond) {
+            System.out.println("Please enter Passenger's ID");
+            try {
+                ID = Integer.parseInt(scanner.nextLine());
+                for (Passenger p : allPassengers) if (p.getID() == ID) cond = true;
+                if (!cond) System.out.println("Enter an existing Passenger ID");
+            } catch (NumberFormatException e) {
+                System.out.println("Enter a correct number");
+            }
+        }
+        System.out.println("Please enter Passenger's full name");
+        String name = scanner.nextLine();
+        System.out.println("Please enter Passenger's address");
+        String address = scanner.nextLine();
+        System.out.println("Please enter Passenger's contact");
+        String contact = scanner.nextLine();
+        System.out.println("Please enter Passenger's passport number");
+        String passport = scanner.nextLine();
+        System.out.println("Editing Passenger");
+        Passenger passenger = Passenger.findPassenger(ID);
+        passenger.setName(name);
+        passenger.setAddress(address);
+        passenger.setContact(contact);
+        passenger.passeport = passport;
+        System.out.println("Passenger edited!");
     }
 
     public static ArrayList<Passenger> getAllPassengers(){
@@ -114,6 +165,6 @@ public class Passenger extends Person{
 
     @Override
     public String toString(){
-        return this.getName() + " passport: " + passeport;
+        return this.getName() + " passport: " + passeport + " ID: " + this.getID();
     }
 }

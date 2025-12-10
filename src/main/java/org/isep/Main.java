@@ -17,7 +17,8 @@ public class Main {
         testReadData();
         assignAircraftTest();
         simulation(100);
-        Flight.addFlight();
+        //Flight.addFlight();
+        Passenger.userRemovePassenger();
         updateAllData();
         for(Book book : Book.getAllBooks()) System.out.println(book);
         displayStats();
