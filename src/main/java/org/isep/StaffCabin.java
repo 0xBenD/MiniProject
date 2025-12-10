@@ -80,7 +80,6 @@ public class StaffCabin extends Employee{
             System.out.println("Please enter Employee ID to remove");
             try {
                 idToRemove = Integer.parseInt(scanner.nextLine());
-                // On vérifie si l'ID existe
                 for (StaffCabin s : allCabinStaff) {
                     if (s.getNumberEmp() == idToRemove) cond = true;
                 }
