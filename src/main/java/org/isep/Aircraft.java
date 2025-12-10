@@ -67,44 +67,34 @@ public class Aircraft {
     public static void updateAircraftCSV() throws IOException{
         File file = new File(PATHNAME);
         FileWriter fw = new FileWriter(file, false);
+        fw.close();
         for(Aircraft a : fleet){
             WriteToFile.write(PATHNAME, a.toCSV());
         }
     }
     public static void addAircraft(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter Aircraft's capacity : ");
-        int capacity = Integer.parseInt(scanner.nextLine());
-        System.out.println("Please enter Aircraft's model : ");
+        int capacity = 0;
+        System.out.println("Enter Aircraft's capacity");
+        try {
+            capacity = Integer.parseInt(scanner.nextLine());
+        }
+        catch (NumberFormatException e){
+            System.out.println("Invalif number, setting default to 100 ");
+            capacity = 100;
+        }
+        System.out.println("Enter Aircraft's model");
         String model = scanner.nextLine();
-        System.out.println("Please enter Aircraft's registration : ");
+        System.out.println("Enter Aircraft's registration");
         String registration = scanner.nextLine();
         new Aircraft(capacity, model, registration);
         System.out.println("Aircraft added successfully\n");
-        try{
-            updateAircraftCSV();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
     }
     public static void userRemoveAircraft(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter Registration to Remove : ");
-        String registration = scanner.nextLine();
-        Aircraft a = findAircraft(registration);
-        if(a != null){
-            fleet.remove(a);
-            System.out.println("Aircraft removed");
-            try{
-                updateAircraftCSV();
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-        else {
-            System.out.println("Aircraft not found");
-        }
+       
+    }
+    public static void userEditAircraft(){
+
     }
 
     public int getCapacity() {
@@ -120,6 +110,10 @@ public class Aircraft {
 
     public static ArrayList<Aircraft> getAllAircraft(){
         return fleet;
+    }
+    @Override
+    public String toString() {
+        return "Aircraft" + registration +  " (" + model + " ) , capaciity : " + capacity ;
     }
 
 
