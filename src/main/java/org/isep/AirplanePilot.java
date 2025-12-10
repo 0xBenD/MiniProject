@@ -123,11 +123,7 @@ public class AirplanePilot extends Employee{
         Scanner scanner = new Scanner(System.in);
         String licenceStr = "";
         boolean cond = false;
-
-        // On affiche la liste pour voir les licences disponibles
         for(AirplanePilot p : allPilots) System.out.println(p);
-
-        // Boucle de validation de la licence (identique à userEditPilot)
         while(!cond) {
             System.out.println("Please enter Pilot's Licence to remove");
             licenceStr = scanner.nextLine();
@@ -136,20 +132,14 @@ public class AirplanePilot extends Employee{
             }
             if(!cond) System.out.println("Enter an existing Licence number");
         }
-
         System.out.println("Removing Pilot with licence " + licenceStr);
-
-        // Logique de suppression
         AirplanePilot toRemove = null;
         for(AirplanePilot p : allPilots) {
             if(p.getLicence().equalsIgnoreCase(licenceStr)) toRemove = p;
         }
-
         if(toRemove != null) {
             allPilots.remove(toRemove);
             System.out.println("Pilot deleted");
-
-            // Sauvegarde automatique après suppression
             try {
                 updatePilotCSV();
             } catch (IOException e) {
