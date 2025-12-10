@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AirplanePilot extends Employee{
     public static ArrayList<AirplanePilot> allPilots = new ArrayList<>();
@@ -54,6 +55,69 @@ public class AirplanePilot extends Employee{
         File file = new File(PATHNAME);
         FileWriter fw = new FileWriter(file, false);
         for(AirplanePilot a : allPilots) WriteToFile.write(PATHNAME, a.toCSV());
+    }
+    public static void addPilot(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter Pilot's full name");
+        String name = scanner.nextLine();
+        System.out.println("Please enter Pilot's address : ");
+        String address = scanner.nextLine();
+        System.out.println("Please enter Pilot's contact : ");
+        String contact = scanner.nextLine();
+        System.out.println("Please enter Pilot's hiring date (yyyy-MM-dd) : ");
+        String hiringDate = scanner.nextLine();
+        System.out.println("Please enter Pilot's License number : ");
+        String licence = scanner.nextLine();
+        System.out.println("Please enter Pilot's flight hours : ");
+        int flightHours = 0;
+        try {
+            flightHours = Integer.parseInt(scanner.nextLine());
+        }
+        catch (NumberFormatException e){
+            System.out.println("Invalif number, setting default to 0 ");
+            flightHours = 0;
+        }
+        new AirplanePilot(name,address,contact,hiringDate,licence,flightHours);
+        System.out.println("Pilot added successfully\n");
+    }
+    public static void userEditPilot(){
+        Scanner scanner = new Scanner(System.in);
+        String licenceStr = "";
+        boolean cond = false;
+        for (AirplanePilot p : allPilots) System.out.println(p);
+        while (!cond) {
+            System.out.println("Please enter Pilot's Licence to edit");
+            licenceStr = scanner.nextLine();
+            // On vérifie si une licence correspond dans la liste
+            for (AirplanePilot p : allPilots) {
+                if (p.getLicence().equalsIgnoreCase(licenceStr)) cond = true;
+            }
+            if (!cond) System.out.println("Enter an existing Licence number");
+        }
+
+        AirplanePilot pilot = null;
+        for(AirplanePilot p : allPilots) {
+            if(p.getLicence().equalsIgnoreCase(licenceStr)) pilot = p;
+        }
+
+        if(pilot != null){
+            System.out.println("Please enter new Name (current: " + pilot.getName() + ")");
+            String newName = scanner.nextLine();
+            if(!newName.isEmpty()) pilot.setName(newName);
+            System.out.println("Please enter new Flight Hours (current: " + pilot.getFlightHours() + ")");
+            try {
+                pilot.flightHours = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number, keeping old hours");
+            }
+
+            System.out.println("Pilot edited!");
+            try {
+                updatePilotCSV(); // Sauvegarde dans le fichier
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
