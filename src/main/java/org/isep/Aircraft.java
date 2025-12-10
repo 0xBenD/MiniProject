@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 
 public class Aircraft {
 
-    private static ArrayList<Aircraft> fleet = new ArrayList<>();
-    private static final String PATHNAME = "src/main/resources/aircraft.csv";
+    protected static ArrayList<Aircraft> fleet = new ArrayList<>();
+    protected static final String PATHNAME = "src/main/resources/aircraft.csv";
 
-    private int capacity;
-    private String model;
-    private String registration;
+    protected int capacity;
+    protected String model;
+    protected String registration;
 
-    private ArrayList<Flight> schedule = new ArrayList<>();
+    protected ArrayList<Flight> schedule = new ArrayList<>();
 
     public Aircraft(int capacity, String model, String registration) {
         this.capacity = capacity;
@@ -91,9 +91,68 @@ public class Aircraft {
         System.out.println("Aircraft added successfully\n");
     }
     public static void userRemoveAircraft(){
-       
+       Scanner scanner = new Scanner(System.in);
+       String registration = "";
+       boolean cond = false;
+       for(Aircraft a : fleet) System.out.println(a);
+       while(!cond) {
+           System.out.println("Please enter Aircraft's registration");
+           registration = scanner.nextLine();
+           for(Aircraft a : fleet) if(a.getRegistration().equalsIgnoreCase(registration)) cond = true;
+           if(!cond) System.out.println("Enter an existing Aircraft's registration");
+       }
+       System.out.println("Removing Aircraft #" + registration);
+       deleteAircraft(registration);
     }
+
+    public static void deleteAircraft(String registration){
+        Aircraft a = findAircraft(registration);
+        if(a != null){
+            fleet.remove(a);
+            System.out.println("Aircraft deleted");
+        }
+        else {
+            System.out.println("Aircraft not found");
+        }
+    }
+
     public static void userEditAircraft(){
+        Scanner scanner = new Scanner(System.in);
+        String registration = "";
+        boolean cond = false;
+        for(Aircraft a : fleet) System.out.println(a);
+        while(!cond) {
+            System.out.println("Please enter Aircraft's registration to edit : ");
+            registration = scanner.nextLine();
+            for (Aircraft a : fleet) {
+                if (a.getRegistration().equalsIgnoreCase(registration)) {
+                    cond = true;
+                }
+            }
+            if (!cond) {
+                System.out.println("Enter an existing Aircraft's registration");
+            }
+        }
+        Aircraft editAircraft = findAircraft(registration);
+        System.out.println("Please enter Aircraft's capacity : ");
+        try {
+            editAircraft.capacity = Integer.parseInt(scanner.nextLine());
+        }
+        catch (NumberFormatException e){
+            System.out.println("Invalid number, keep old capacity ");
+        }
+        System.out.println("Please enter Aircraft's model : ");
+        String newModel = scanner.nextLine();
+
+        if(!newModel.isEmpty()){
+            editAircraft.model = newModel;
+        }
+        System.out.println("Aircraft edited!");
+        try {
+            updateAircraftCSV();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
