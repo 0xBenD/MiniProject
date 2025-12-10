@@ -67,5 +67,9 @@ public class Aircraft {
         return model;
     }
 
+    public static ArrayList<Aircraft> getAllAircraft(){
+        return fleet;
+    }
+
 
 }

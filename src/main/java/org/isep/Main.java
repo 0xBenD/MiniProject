@@ -41,6 +41,9 @@ public class Main {
         ArrayList<String> dataFlight = FileReaderWithBufferedReader.readCSV("src/main/resources/flight.csv", new ArrayList<String>());
         for (int i = 0; i < dataFlight.size(); i += 5) new Flight(parseInt(dataFlight.get(i)), Airport.findAirport(dataFlight.get(i + 1)), Airport.findAirport(dataFlight.get(i + 2)), Flight.StringtoDate(dataFlight.get(i + 3)), Flight.StringtoDate(dataFlight.get(i + 4)));
 
+        ArrayList<String> dataAircraft = FileReaderWithBufferedReader.readCSV("src/main/resources/aircraft.csv", new ArrayList<String>());
+        for (int i = 0; i < dataAircraft.size(); i += 3) new Aircraft(parseInt(dataAircraft.get(i)), dataAircraft.get(i + 1), dataAircraft.get(i + 2));
+
     }
 
     public static void testReadData(){
@@ -80,8 +83,13 @@ public class Main {
     }
 
     public static void assignAircraftTest(){
-        for(Flight a : Flight.getAllFlights()){
-            a.assignAircraft(new Aircraft(100,"A320","Test"+a.getFlightNumber()));
+        for(Flight f : Flight.getAllFlights()){
+            for(Aircraft a : Aircraft.getAllAircraft()){
+                if(a.checkAvailability(f.getDepartureDate(),f.getArrivaleDate())){
+                    a.assignFlight(f);
+                    break;
+                }
+            }
         }
     }
 
