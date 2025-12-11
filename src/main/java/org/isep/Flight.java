@@ -333,8 +333,12 @@ public class Flight {
         return flightNumber + " origin: " + origine + " destination: " + destination + " departure date: " + departureDate.toString() + " arrival date: " + arrivalDate.toString() ;
     }
 
+    public void setStatus(){
+        this.status = status;
+    }
+
     public String toCSV() {
-        return flightNumber + "," + origine.getName() + "," + destination.getName() + "," + departureDate.toString() + "," + arrivalDate.toString() + "\n";
+        return flightNumber + "," + origine.getName() + "," + destination.getName() + "," + departureDate.toString() + "," + arrivalDate.toString() + "," + status + "\n";
     }
 
     public static void updateFlightCSV() throws IOException {
