@@ -44,6 +44,19 @@ public class AirlineTest {
 
     @Test
     public void testPassengerCapacity(){
+        Airport airport = new Airport("ORY", "Paris", "Orly");
+        Flight flight = new Flight(301, airport, airport, LocalDateTime.now(), LocalDateTime.now().plusHours(2));
 
+        Aircraft tinyPlane = new Aircraft(1, "Cessna", "F-TINY");
+        flight.assignAircraft(tinyPlane);
+
+        Passenger p1 = new Passenger("John Doe", "Paris", "0102030405", "PASS123");
+        Passenger p2 = new Passenger("Jane Doe", "Lyon", "0607080910", "PASS456");
+
+        boolean added1 = flight.addPassenger(p1);
+        assertTrue(added1, "Le premier passager devrait être accepté");
+
+        boolean added2 = flight.addPassenger(p2);
+        assertFalse(added2, "Le second passager doit être refusé car l'avion est plein");
     }
 }
