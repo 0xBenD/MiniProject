@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Collections;
 
 import static java.lang.Integer.parseInt;
 
@@ -85,6 +86,26 @@ public class Main {
     }
 
     public static void assignAircraftTest(){
+        System.out.println("Assigning aircraft randomly");
+        ArrayList<Aircraft> fleetCopy = new ArrayList<>(Aircraft.getAllAircraft());
+        for(Flight f : Flight.getAllFlights()){
+            Collections.shuffle(fleetCopy);
+            boolean assigned = false;
+            for(Aircraft a : fleetCopy){
+                if(a.checkAvailability(f.getDepartureDate(),f.getArrivaleDate())){
+                    a.assignFlight(f);
+                    f.assignAircraft(a);
+                    assigned = true;
+                    break;
+                }
+            }
+            if(!assigned){
+                System.out.println("No aircraft available for flight " + f.getFlightNumber());
+            }
+            System.out.println("Aircraft assignement process finished");
+        }
+
+        /*
         for(Flight f : Flight.getAllFlights()){
             for(Aircraft a : Aircraft.getAllAircraft()){
                 if(a.checkAvailability(f.getDepartureDate(),f.getArrivaleDate())){
@@ -93,6 +114,8 @@ public class Main {
                 }
             }
         }
+        */
+
     }
 
     public static void simulation(int nb){
