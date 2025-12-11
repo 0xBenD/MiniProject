@@ -21,7 +21,25 @@ public class AirlineTest {
 
     @Test
     public void testAircraftAvailability(){
+        Aircraft plane = new Aircraft(150, "Boeing 737", "F-GZTA");
+        Airport airport = new Airport("Test", "Test", "Test");
 
+        Flight flight1 = new Flight(201, airport, airport,
+                LocalDateTime.of(2023, 1, 1, 10, 0),
+                LocalDateTime.of(2023, 1, 1, 12, 0));
+        plane.assignFlight(flight1);
+
+        boolean isAvailableOverlap = plane.checkAvailability(
+                LocalDateTime.of(2023, 1, 1, 11, 0),
+                LocalDateTime.of(2023, 1, 1, 13, 0)
+        );
+        assertFalse(isAvailableOverlap, "L'avion ne devrait pas être dispo (chevauchement)");
+
+        boolean isAvailableLater = plane.checkAvailability(
+                LocalDateTime.of(2023, 1, 1, 13, 0),
+                LocalDateTime.of(2023, 1, 1, 15, 0)
+        );
+        assertTrue(isAvailableLater, "L'avion devrait être dispo (créneau libre)");
     }
 
     @Test
