@@ -11,10 +11,11 @@ import java.util.Scanner;
 import java.util.Collections;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Math.abs;
 
 public class Main {
 
-    public static LocalDateTime simulationTime = LocalDateTime.of(2023,12,10,9,0 );
+    public static LocalDateTime simulationTime = LocalDateTime.of(2025,11,10,9,0 );
 
     public static void main(String[] args) throws IOException {
         /*
@@ -28,21 +29,21 @@ public class Main {
         updateFlightStatus();
         */
 
-
-        interractiveMenue();
+        readAlldata();
+        interractiveMenu();
 
         for(Book book : Book.getAllBooks()) System.out.println(book);
         displayStats();
     }
 
-    public static void interractiveMenue(){
+    public static void interractiveMenu(){
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         System.out.println("#######################################################################################################################################################################################################");
         System.out.println("                                                                             AIRLINE MANAGEMENT SYSTEM CONSOLE"                                                                                         );
         System.out.println("#######################################################################################################################################################################################################");
         while(running){
-            System.out.println("\n -- Main Menue -- \n");
+            System.out.println("\n -- Main Menu -- \n");
             System.out.println("1.  Manage Passengers (Add/Remove/Edit)");
             System.out.println("2.  Manage Flights (Add/Remove/Edit)");
             System.out.println("3.  Manage Aircrafts & Airports");
@@ -50,6 +51,8 @@ public class Main {
             System.out.println("5.  SIMULATION: Advance Time (Update Status)");
             System.out.println("6.  SIMULATION: Re-Assign Aircrafts (Random)");
             System.out.println("7.  Display Global Statistics");
+            System.out.println("8.  Launch SIMULATION");
+            System.out.println("9.  Display Flights' Status");
             System.out.println("0.  Save Data & Exit");
             System.out.print("Enter your choice: ");
             String choice = scanner.nextLine();
@@ -132,8 +135,27 @@ public class Main {
                     break;
 
                 case "7":
+                    for(Book book : Book.getAllBooks()) System.out.println(book);
                     displayStats();
                     break;
+
+                case "8" :
+                    int nb = 0;
+                    do {
+                        System.out.println("How many simulation rounds?");
+                        try{
+                            nb = Integer.parseInt(scanner.nextLine());
+                            break;
+                        }
+                        catch (NumberFormatException e){
+                            System.out.println("Please enter an Integer");
+                        }
+                    }while(true);
+                    simulation(abs(nb));
+                    break;
+
+                case "9":
+                    for(Flight f : Flight.getAllFlights()) System.out.println("flight" + f.getFlightNumber() + " is " + f.getStatus());
 
                 case "0":
                     System.out.println("Saving data...");
@@ -185,6 +207,9 @@ public class Main {
 
         ArrayList<String> dataAircraft = FileReaderWithBufferedReader.readCSV("src/main/resources/aircraft.csv", new ArrayList<String>());
         for (int i = 0; i < dataAircraft.size(); i += 3) new Aircraft(parseInt(dataAircraft.get(i)), dataAircraft.get(i + 1), dataAircraft.get(i + 2));
+        for(Flight f : Flight.getAllFlights()){
+            f.updateStatus(simulationTime);
+        }
 
     }
 
@@ -263,7 +288,7 @@ public class Main {
             f.updateStatus(simulationTime);
         }
         for(Flight f : Flight.getAllFlights()){
-            if(f.getDepartureDate().toLocalDate().equals(simulationTime.toLocalDate())){
+            if(f.getDepartureDate().toLocalDate().isBefore(simulationTime.toLocalDate())){
                 System.out.println("flight" + f.getFlightNumber() + " is " + f.getStatus());
             }
         }

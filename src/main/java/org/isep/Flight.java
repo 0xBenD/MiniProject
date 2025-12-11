@@ -302,7 +302,7 @@ public class Flight {
             return;
         }
         if(currentTime.isAfter(this.arrivalDate)) {
-            return;
+            this.status = FlightStatus.ARRIVED;
         }
         if(currentTime.isAfter(this.departureDate) && currentTime.isBefore(this.arrivalDate)){
             if(this.status != FlightStatus.DELAYED) {

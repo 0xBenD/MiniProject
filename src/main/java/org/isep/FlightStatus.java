@@ -9,4 +9,5 @@ public enum FlightStatus {
     CANCELED,
     PENDING,
     CONFIRMED,
+    ARRIVED,
 }
