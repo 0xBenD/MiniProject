@@ -13,6 +13,9 @@ import java.util.Collections;
 import static java.lang.Integer.parseInt;
 
 public class Main {
+
+    //public static LocalDateTime simulationTime = LocalDateTime.of(2023,12,10,9,0 );
+
     public static void main(String[] args) throws IOException {
         readAlldata();
         testReadData();

@@ -359,5 +359,8 @@ public class Flight {
     public LocalDateTime getArrivaleDate(){
         return arrivalDate;
     }
+    public FlightStatus getStatus(){
+        return status;
+    }
 
 }
