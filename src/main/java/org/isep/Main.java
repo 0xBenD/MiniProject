@@ -20,6 +20,8 @@ public class Main {
         //Flight.addFlight();
         Passenger.userRemovePassenger();
         updateAllData();
+        updateFlightStatus();
+
         for(Book book : Book.getAllBooks()) System.out.println(book);
         displayStats();
     }
@@ -100,6 +102,14 @@ public class Main {
             Flight tempFlight = Flight.getAllFlights().get(randInt.nextInt(Flight.getAllFlights().size()-1));
             tempPassenger.bookFlight(tempFlight,tempFlight.getDepartureDate().toString());
         }
+    }
+
+    public static void updateFlightStatus(){
+        System.out.println("Updating flight status");
+        for(Flight f : Flight.getAllFlights()){
+            f.updateStatusRandomly();
+        }
+        System.out.println("Flight status updated");
     }
 
     public static void displayStats(){
