@@ -298,6 +298,28 @@ public class Flight {
         }
     }
 
+    public void updateStatus(LocalDateTime currentTime){
+        if(this.status == FlightStatus.CANCELED){
+            return;
+        }
+        if(currentTime.isAfter(this.arrivalDate)) {
+            return;
+        }
+        if(currentTime.isAfter(this.departureDate) && currentTime.isBefore(this.arrivalDate)){
+            if(this.status != FlightStatus.DELAYED) {
+                this.status = FlightStatus.DEPARTURE;
+            }
+        }
+        else if(currentTime.isAfter(this.departureDate.minusMinutes(30)) && currentTime.isBefore(this.departureDate)){
+            if(this.status != FlightStatus.DELAYED) {
+                this.status = FlightStatus.BOARDING;
+            }
+        }
+        if(currentTime.isBefore(this.departureDate)){
+            updateStatusRandomly();
+        }
+    }
+
     public void rescheduleFlight(LocalDateTime newDeparture, LocalDateTime newArrival){
         this.departureDate = newDeparture;
         this.arrivalDate = newArrival;
