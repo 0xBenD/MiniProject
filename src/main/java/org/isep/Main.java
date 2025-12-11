@@ -14,10 +14,10 @@ import static java.lang.Integer.parseInt;
 
 public class Main {
 
-    //public static LocalDateTime simulationTime = LocalDateTime.of(2023,12,10,9,0 );
+    public static LocalDateTime simulationTime = LocalDateTime.of(2023,12,10,9,0 );
 
     public static void main(String[] args) throws IOException {
-
+        /*
         readAlldata();
         testReadData();
         assignAircraftTest();
@@ -26,7 +26,7 @@ public class Main {
         Passenger.userRemovePassenger();
         updateAllData();
         updateFlightStatus();
-
+        */
 
 
         interractiveMenue();
@@ -137,7 +137,12 @@ public class Main {
 
                 case "0":
                     System.out.println("Saving data...");
-                    updateAllData();
+                    try {
+                        updateAllData();
+                        System.out.println("Data saved successfully.");
+                    } catch (IOException e) {
+                        System.out.println("(!) Error while saving data: " + e.getMessage());
+                    }
                     running = false;
                     break;
 
@@ -206,21 +211,21 @@ public class Main {
         Passenger.updatePassengerCSV();
     }
 
-    public static void assignAircraftTest(){
+    public static void assignAircraftTest() {
         System.out.println("Assigning aircraft randomly");
         ArrayList<Aircraft> fleetCopy = new ArrayList<>(Aircraft.getAllAircraft());
-        for(Flight f : Flight.getAllFlights()){
+        for (Flight f : Flight.getAllFlights()) {
             Collections.shuffle(fleetCopy);
             boolean assigned = false;
-            for(Aircraft a : fleetCopy){
-                if(a.checkAvailability(f.getDepartureDate(),f.getArrivaleDate())){
+            for (Aircraft a : fleetCopy) {
+                if (a.checkAvailability(f.getDepartureDate(), f.getArrivaleDate())) {
                     a.assignFlight(f);
                     f.assignAircraft(a);
                     assigned = true;
                     break;
                 }
             }
-            if(!assigned){
+            if (!assigned) {
                 System.out.println("No aircraft available for flight " + f.getFlightNumber());
             }
             System.out.println("Aircraft assignement process finished");
@@ -237,6 +242,18 @@ public class Main {
         }
         */
 
+    }
+    public static void userAdvanceTime(int minutes){
+        simulationTime = simulationTime.plusMinutes(minutes);
+        System.out.println("New time: " + simulationTime+ "\n");
+        for(Flight f : Flight.getAllFlights()){
+            f.updateStatus(simulationTime);
+        }
+        for(Flight f : Flight.getAllFlights()){
+            if(f.getDepartureDate().toLocalDate().equals(simulationTime.toLocalDate())){
+                System.out.println("flight" + f.getFlightNumber() + " is " + f.getStatus());
+            }
+        }
     }
 
     public static void simulation(int nb){

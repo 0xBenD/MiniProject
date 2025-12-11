@@ -291,7 +291,6 @@ public class Flight {
         int randomInt = random.nextInt(100);
         if(randomInt < 5){
             this.status = FlightStatus.DELAYED;
-            System.out.println("Flight " + flightNumber + " has been delayed");
         }
         else if(this.status != FlightStatus.DELAYED){
             this.status = FlightStatus.ON_TIME;
