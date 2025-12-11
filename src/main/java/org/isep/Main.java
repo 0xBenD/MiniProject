@@ -30,6 +30,7 @@ public class Main {
         */
 
         readAlldata();
+        assignAircraftTest();
         interractiveMenu();
 
         for(Book book : Book.getAllBooks()) System.out.println(book);
@@ -258,7 +259,7 @@ public class Main {
             for (Aircraft a : fleetCopy) {
                 if (a.checkAvailability(f.getDepartureDate(), f.getArrivaleDate())) {
                     a.assignFlight(f);
-                    f.assignAircraft(a);
+                    //f.assignAircraft(a);
                     assigned = true;
                     break;
                 }
