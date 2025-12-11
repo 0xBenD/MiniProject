@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Random;
 
 
 public class Flight {
@@ -280,6 +281,21 @@ public class Flight {
         editFlight.destination = destinationAirport;
         editFlight.rescheduleFlight(departureDate,arrivalDate);
         System.out.println("Flight edited!");
+    }
+
+    public void updateStatusRandomly(){
+        if(this.status == FlightStatus.CANCELED){
+            return;
+        }
+        Random random = new Random();
+        int randomInt = random.nextInt(100);
+        if(randomInt < 5){
+            this.status = FlightStatus.DELAYED;
+            System.out.println("Flight " + flightNumber + " has been delayed");
+        }
+        else if(this.status != FlightStatus.DELAYED){
+            this.status = FlightStatus.ON_TIME;
+        }
     }
 
     public void rescheduleFlight(LocalDateTime newDeparture, LocalDateTime newArrival){
