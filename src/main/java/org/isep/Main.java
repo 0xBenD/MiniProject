@@ -168,7 +168,20 @@ public class Main {
         for (int i = 0; i < dataAirport.size(); i += 3) new Airport(dataAirport.get(i), dataAirport.get(i + 1), dataAirport.get(i + 2));
 
         ArrayList<String> dataFlight = FileReaderWithBufferedReader.readCSV("src/main/resources/flight.csv", new ArrayList<String>());
-        for (int i = 0; i < dataFlight.size(); i += 5) new Flight(parseInt(dataFlight.get(i)), Airport.findAirport(dataFlight.get(i + 1)), Airport.findAirport(dataFlight.get(i + 2)), Flight.StringtoDate(dataFlight.get(i + 3)), Flight.StringtoDate(dataFlight.get(i + 4)));
+        for (int i = 0; i < dataFlight.size(); i += 6) {
+            Flight f = new Flight(parseInt(dataFlight.get(i)),
+                    Airport.findAirport(dataFlight.get(i + 1)),
+                    Airport.findAirport(dataFlight.get(i + 2)),
+                    Flight.StringtoDate(dataFlight.get(i + 3)),
+                    Flight.StringtoDate(dataFlight.get(i + 4))
+            );
+            try {
+                FlightStatus savedStatus = FlightStatus.valueOf(dataFlight.get(i + 5));
+                f.setStatus(savedStatus);
+            } catch (IllegalArgumentException e) {
+                f.setStatus(FlightStatus.ON_TIME);
+            }
+        }
 
         ArrayList<String> dataAircraft = FileReaderWithBufferedReader.readCSV("src/main/resources/aircraft.csv", new ArrayList<String>());
         for (int i = 0; i < dataAircraft.size(); i += 3) new Aircraft(parseInt(dataAircraft.get(i)), dataAircraft.get(i + 1), dataAircraft.get(i + 2));

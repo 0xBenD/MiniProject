@@ -333,7 +333,7 @@ public class Flight {
         return flightNumber + " origin: " + origine + " destination: " + destination + " departure date: " + departureDate.toString() + " arrival date: " + arrivalDate.toString() ;
     }
 
-    public void setStatus(){
+    public void setStatus(FlightStatus status){
         this.status = status;
     }
 
