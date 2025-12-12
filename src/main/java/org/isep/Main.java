@@ -157,6 +157,7 @@ public class Main {
 
                 case "9":
                     for(Flight f : Flight.getAllFlights()) System.out.println("flight" + f.getFlightNumber() + " is " + f.getStatus());
+                    break;
 
                 case "0":
                     System.out.println("Saving data...");
@@ -258,8 +259,8 @@ public class Main {
             boolean assigned = false;
             for (Aircraft a : fleetCopy) {
                 if (a.checkAvailability(f.getDepartureDate(), f.getArrivaleDate())) {
-                    a.assignFlight(f);
-                    //f.assignAircraft(a);
+                    //a.assignFlight(f);
+                    f.assignAircraft(a);
                     assigned = true;
                     break;
                 }
